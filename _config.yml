@@ -1,0 +1,11 @@
+safe:        true
+port: 4000
+baseurl:     /
+permalink:	 pretty
+#Setup
+title:		 Simon Chen
+tagline: 	 'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
+subscribe:   Subscribe
+url:         http://localhost:4000
+future:      true
+permalink:   date
