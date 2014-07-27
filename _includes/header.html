@@ -1,33 +1,34 @@
-<div class="navbar navbar-inverse">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="{{ site.baseurl }}">SC Logo</a>
-  </div>
-  <div class="navbar-collapse collapse navbar-inverse-collapse">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Active</a></li>
-      <li><a href="https://www.flickr.com/photos/floatingon">flickr</a></li>
-	  <li><a href="http://500px.com/SimonChen1">500px</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li class="dropdown-header">Dropdown header</li>
-          <li><a href="#">Separated link</a></li>
-          <li><a href="#">One more separated link</a></li>
-        </ul>
-      </li>
-    </ul>
-    <form class="navbar-form navbar-left">
-      <input type="text" class="form-control col-lg-8" placeholder="Search">
-    </form>
-    
-  </div>
+<div class="wrapper">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{{ site.baseurl }}">SC Logo</a>
+			
+			
+		</div>
+		<ul class="nav navbar-nav">
+		  <li><a href="#"><span class="glyphicon glyphicon-comment"></span>Blog</a></li>
+		  <li><a href="#"><span class="glyphicon glyphicon-camera"></span>Portfolio</a></li>
+		  <li><a href="#"><span class="glyphicon glyphicon-user"></span>About</a></li>
+		  <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-cloud"></span>Sites<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+			  <li><a href="https://www.flickr.com/photos/floatingon">flickr</a></li>
+			  <li class="divider"></li>
+			  <li><a href="http://500px.com/SimonChen1">500px</a></li>
+			</ul>
+		  </li>
+		</ul>
+		<form class="navbar-form navbar-right">
+		  <input type="text" class="form-control col-lg-8" placeholder="Search">
+		</form>
+	
+	</nav>
+  
+	<div class="jumbotron clear banner animate-background">
+		<h1>
+			{{ site.title }}
+		</h1>
+		<p>{{ site.tagline }}</p>
+	</div>     
 </div>
