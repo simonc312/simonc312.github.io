@@ -1,11 +1,32 @@
 safe:        true
-port: 4000
+port:        4000
 baseurl:     /
-permalink:	 pretty
+permalink:   pretty
+exclude: ['images']
 #Setup
-title:		 Simon Chen
-tagline: 	 'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
+title:       Simon Chen
+tagline:     'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
 subscribe:   Subscribe
 url:         http://localhost:4000
 future:      true
-permalink:   date
+collections:
+  portfolio:
+      output: true
+      permalink: /portfolio/:path/
+  projects:
+      output: true
+      permalink: /projects/:path/
+defaults: 
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: "portfolio"
+      type: "page"
+    values:
+      layout: "default" # overrides previous default layout
+      author: "Simon Chen"
+      category: "portfolio"
