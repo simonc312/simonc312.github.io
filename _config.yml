@@ -9,6 +9,25 @@ tagline:     'Welcome to my personal website! Feel free to waste time here. Upda
 subscribe:   Subscribe
 url:         http://localhost:4000
 future:      true
+
+navigation:
+- text: Blog
+  url: /blog/
+  glyph: 'glyphicon glyphicon-comment'
+  color: orange
+- text: Portfolio
+  url: /portfolio/
+  glyph: 'glyphicon glyphicon-camera'
+  color: blue
+- text: Projects
+  url: /projects/
+  glyph: 'glyphicon glyphicon-folder-open' 
+  layout: default
+  color: orange
+- text: About
+  url: /about/
+  glyph: 'glyphicon glyphicon-user'
+  color: blue
 collections:
   portfolio:
       output: true
