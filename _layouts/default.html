@@ -8,11 +8,18 @@
 		<link rel="stylesheet" href="/css/custom.css" type="text/css">
 		<link rel="stylesheet" href="/css/colors.css" type="text/css">
 		{% include favicon.html %}
-		{% include header.html %}
 		{% include analytics.html %}
 	</head>
 	<body class="background-pattern">
-		{{ content }}
+		<div class= "container-fluid">
+			<div class="row">
+				{% include header.html %}
+				{% include left-sidebar.html %}
+				{{ content }}
+  			</div>
+  		</div>	
+	</div>
+		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="/js/modernizr.js"></script>

@@ -1,9 +1,21 @@
+@-ms-viewport{
+    width: extend-to-zoom;
+    zoom: 1.0;
+}
+
 html, body { height: 100%; }
 .no-underline { text-decoration: none; }
 
 .banner{background-color:#ADD8E6 ;margin-top:20px;padding-top:20px; }
 .background-pattern{background-image: url("/assets/gplaypattern.png");
 background-repeat:repeat; }
+
+.clear{clear: both;}
+span{padding-right: 10px;}
+
+.fill-viewport-height{
+height:100%;
+}
 
 @media only screen and (min-width : 768px) {
     /* Make Navigation Toggle on Desktop Hover */
@@ -17,16 +29,16 @@ background-repeat:repeat; }
 
 	body{padding-top: 70px;}
 
+  .navbar .sidebar-nav li {margin: 20%;}
 }
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
 
-  .navbar-fixed-top .container {height: 100%; padding-bottom: 100%;}	
+  .navbar-fixed-top .container {height: 100%;}	
 
   .navbar-default{
   	height: 100%;
-  	padding-bottom: 1000%;
   }
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
@@ -40,11 +52,14 @@ background-repeat:repeat; }
   }
   .sidebar-nav .navbar li {
     float: none;
+    margin: 20%;
     /*display: block;*/
   }
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .logo {
@@ -55,15 +70,5 @@ background-repeat:repeat; }
 
 }
 
-.navbar li {
-  height: 1%;
 
-}
-
-.navbar li a {
-  padding-right: 20px;
-}
-
-.clear{clear: both;}
-span{padding-right: 10px;}
 
