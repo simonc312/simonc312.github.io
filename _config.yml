@@ -11,20 +11,20 @@ url:         http://localhost:4000
 future:      true
 
 navigation:
-- text: Blog
+- text: BLOG
   url: /blog/
   glyph: 'glyphicon glyphicon-comment'
   color: orange
-- text: Portfolio
+- text: PORTFOLIO
   url: /portfolio/
   glyph: 'glyphicon glyphicon-camera'
   color: blue
-- text: Projects
+- text: PROJECTS
   url: /projects/
   glyph: 'glyphicon glyphicon-folder-open' 
   layout: default
   color: orange
-- text: About
+- text: ABOUT
   url: /about/
   glyph: 'glyphicon glyphicon-user'
   color: blue

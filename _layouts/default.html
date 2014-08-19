@@ -13,9 +13,24 @@
 	<body class="background-pattern">
 		<div class= "container-fluid">
 			<div class="row">
-				{% include header.html %}
+				
 				{% include left-sidebar.html %}
-				{{ content }}
+				<div id="site-wrapper">
+					<div id="site-canvas">
+						{% include header.html %}
+						<div id="site-submenu">
+							 <h2>Submenu</h2>
+				                <p class="lead">Categories.</p>
+				                <p>Places.</p>
+				                <ul>
+				                    <li>New York</li>
+				                    <li>Houston</li>
+				                    
+				                </ul>
+            			</div>
+					</div>
+					{{ content }}
+				</div>
   			</div>
   		</div>	
 	</div>
@@ -23,6 +38,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="/js/modernizr.js"></script>
+		<script src="/js/custom.js"></script>
 		
 	</body>
 	<footer>

@@ -29,12 +29,56 @@ height:100%;
 
 	body{padding-top: 70px;}
 
-  .navbar .sidebar-nav li {margin: 20%;}
+  .navbar .sidebar-nav li { margin-top: 20%;
+    margin-bottom: 20%;
+    margin-right: 0%;
+    margin-left: 0%;}
+}
+
+#site-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%; 
+}
+
+#site-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: .3s ease all;
+    transition: .3s ease all;
+    padding: 5% 0; /* Temp: Just spacing. */
+}
+
+#site-submenu {
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    background: #FFDC00;
+    padding: 15px;
+}
+
+#site-canvas {
+    -webkit-transform: translateZ(0) translateX(0);
+    transform: translateZ(0) translateX(0);
+     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.show-nav #site-canvas {
+    -webkit-transform: translateZ(0) translateX(180px);  
+    transform: translateZ(0) translateX(180px);  
 }
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
 
+  .container-fluid {height:100%;}
+  .container-fluid .row {height:100%;}
   .navbar-fixed-top .container {height: 100%;}	
 
   .navbar-default{
@@ -52,13 +96,16 @@ height:100%;
   }
   .sidebar-nav .navbar li {
     float: none;
-    margin: 20%;
+    margin-top: 20%;
+    margin-bottom: 20%;
+    margin-right: 0%;
+    margin-left: 0%;
     /*display: block;*/
   }
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;
-    padding-left: 0px;
+    padding-left: 10px;
     padding-right: 0px;
   }
 
