@@ -36,11 +36,17 @@ collections:
       output: true
       permalink: /projects/:path/
 defaults: 
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: "default"
+      type: "page"
+  - 
+    scope:
+      path: "/projects/d3/"
+    values:
+      layout: "cs164"
+      category: "projects"
   -
     scope:
       path: "portfolio"
