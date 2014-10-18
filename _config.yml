@@ -40,7 +40,7 @@ defaults:
       path: ""
     values:
       layout: "default"
-      type: "page"
+      type: "pages"
   - 
     scope:
       path: "/projects/d3/"
@@ -50,7 +50,7 @@ defaults:
   -
     scope:
       path: "portfolio"
-      type: "page"
+      type: "pages"
     values:
       layout: "default" # overrides previous default layout
       author: "Simon Chen"
