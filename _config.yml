@@ -28,6 +28,12 @@ navigation:
   url: /about/
   glyph: 'glyphicon glyphicon-user'
   color: blue
+
+footer-links:
+  github: simonc312
+  twitter: Simonchen312
+  linkedin: simon-chen/71/b15/149
+
 collections:
   portfolio:
       output: true
