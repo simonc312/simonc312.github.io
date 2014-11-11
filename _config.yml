@@ -47,6 +47,13 @@ defaults:
     values:
       layout: "cs164"
       category: "projects"
+
+  - 
+    scope:
+      path: "/projects/sf_crime/"
+    values:
+      layout: "SFcrime"
+      category: "projects"
   -
     scope:
       path: "portfolio"
