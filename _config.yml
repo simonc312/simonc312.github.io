@@ -28,6 +28,12 @@ navigation:
   url: /about/
   glyph: 'glyphicon glyphicon-user'
   color: blue
+
+footer-links:
+  github: simonc312
+  twitter: Simonchen312
+  linkedin: simon-chen/71/b15/149
+
 collections:
   portfolio:
       output: true
@@ -40,7 +46,7 @@ defaults:
       path: ""
     values:
       layout: "default"
-      type: "page"
+      type: "pages"
   - 
     scope:
       path: "/projects/d3/"
@@ -57,7 +63,7 @@ defaults:
   -
     scope:
       path: "portfolio"
-      type: "page"
+      type: "pages"
     values:
       layout: "default" # overrides previous default layout
       author: "Simon Chen"

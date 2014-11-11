@@ -1,0 +1,17 @@
+.social-media-container div {
+	display: inline;
+    overflow:hidden;
+}
+
+#twitter > iframe {
+	position: relative;
+	width: 80px !important;
+	top: 4px;
+}
+
+#reddit a > img {
+	margin-bottom: 0px;
+}
+
+.social-media-list { width: 393px; }
+.social-media-list li { display:block; float: left; width:25%; text-align:center; margin: 0 auto;}

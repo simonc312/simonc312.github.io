@@ -1,6 +1,20 @@
 <div class= "container-fluid">
 	<div class="row">
-		<div class="col-sm-3">
+		<div class="col-sm-3 col-sm-offset-2">
+
+			 {% if site.footer-links.github %}
+			 	<a href="http://github.com/{{ site.footer-links.github }}"><img src= "/assets/github1.png"></a>
+			 {% endif %}
+
+			 {% if site.footer-links.twitter %}
+			 	<a href="http://twitter.com/{{ site.footer-links.twitter }}"><img src="/assets/twitter.png"></a>
+			 {% endif %}
+
+			 {% if site.footer-links.linkedin %}
+			 	<a href="https://www.linkedin.com/pub/{{ site.footer-links.twitter }}"><img src="/assets/linkedin.png"></a>
+			 {% endif %}
+
+
 			<p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
 		</div>
 	</div>
