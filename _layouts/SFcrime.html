@@ -104,7 +104,8 @@
         var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
         var mapOptions = {
           center: sanFrancisco,
-          zoom: 13,
+          zoom: 12,
+          minZoom: 12,
           streetViewControl: false,
           mapTypeId: google.maps.MapTypeId.ROAD
         };
@@ -116,12 +117,30 @@
         document.getElementById('zoom_level'));
         map.setOptions(highLevelStyles);
 
-        google.maps.event.addListener(map, 'zoom_changed', function () {
+          // bounds of the desired area
+      var allowedBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(37.590059187414685, -122.63448208007815),
+          new google.maps.LatLng(37.80174049420249, -122.3091720214844)
+          
+      );
+      var lastValidCenter = map.getCenter();
 
+      google.maps.event.addListener(map, 'center_changed', function() {
+          if (allowedBounds.contains(map.getCenter())) {
+            // still within valid bounds, so save the last valid position
+            lastValidCenter = map.getCenter();
+          } else{
+            // not valid anymore => return to last valid position
+            alert("not in bounds");
+            map.panTo(lastValidCenter);
+          }
+      });
+
+        google.maps.event.addListener(map, 'zoom_changed', function () {
           var zoomLevel = map.getZoom();
           document.getElementById('zoom_level').innerHTML = 'Zoom Level: ' + zoomLevel;
           
-          if(zoomLevel < 12 || zoomLevel > 13){
+          if(heatmap.getMap() || zoomLevel < 12 || zoomLevel > 13){
             $.each(district_markers,function(i,marker){
               marker.setVisible(false);
             });
@@ -190,6 +209,7 @@
     };
 
       google.maps.event.addDomListener(window, 'load', initialize);
+
 
            $.when(
         // Get all the data points for vehicle thefts
