@@ -1,0 +1,30 @@
+html, body, #map-canvas {
+ height: 100%; margin: 0; padding: 0;
+}
+
+#legend, #zoom_level {
+  background: white;
+  padding: 10px;
+}
+
+.labels{
+ color: white;
+ background-color: transparent;
+ font-family: "Lucida Grande", "Arial", sans-serif;
+ font-size: 12px;
+ font-weight: bold;
+ text-align: center;
+ width: 120px;     
+ white-space: nowrap;
+}
+
+.district_total{
+  color: white;
+ background-color: transparent;
+ font-family: "Lucida Grande", "Arial", sans-serif;
+ font-size: 25px;
+ font-weight: bold;
+ text-align: center;
+ width: 120px;     
+ white-space: nowrap;
+}
