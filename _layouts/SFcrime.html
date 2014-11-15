@@ -67,7 +67,7 @@
             animation: google.maps.Animation.DROP,
             icon: getCircle(vehicle_theft_district_data.Total[i]),
             labelContent: "<div>"+district+"<div class='district_total'>"+vehicle_theft_district_data.Total[i]+"</div></div>",
-            labelAnchor: new google.maps.Point(40, 10),
+            labelAnchor: new google.maps.Point(50, 10),
             labelClass: "labels", // the CSS class for the label
             labelStyle: {opacity: 0.75},
             labelInBackground: false
@@ -121,7 +121,6 @@
       var allowedBounds = new google.maps.LatLngBounds(
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
           new google.maps.LatLng(37.80174049420249, -122.3091720214844)
-          
       );
       var lastValidCenter = map.getCenter();
 
@@ -131,7 +130,6 @@
             lastValidCenter = map.getCenter();
           } else{
             // not valid anymore => return to last valid position
-            alert("not in bounds");
             map.panTo(lastValidCenter);
           }
       });

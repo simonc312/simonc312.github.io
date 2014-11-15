@@ -16,6 +16,7 @@ html, body, #map-canvas {
  text-align: center;
  width: 120px;     
  white-space: nowrap;
+ text-shadow: 2px 4px 3px rgba(0,0,0,1);
 }
 
 .district_total{
@@ -27,4 +28,5 @@ html, body, #map-canvas {
  text-align: center;
  width: 120px;     
  white-space: nowrap;
+ text-shadow: 2px 4px 3px rgba(0,0,0,1);
 }
