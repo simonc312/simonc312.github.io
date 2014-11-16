@@ -21,30 +21,51 @@
       var heatmap = []; //array of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
       var district_markers = [];
-      function addHeatMapData(){
+      var gradients = [];
 
+      function initializeHeatMapArray(){
+        $.each(vehicle_theft_district_data.PdDistrict, function(i, district){
+          heatmapData[district] = [];
+          heatmap[i] = district;
+          gradients[i] =  [
+              'rgba(0, 255, 255, 0)',
+              'rgba(0, 255, 255, 1)',
+              'rgba(0, 191, 255, 1)',
+              'rgba(0, 127, 255, 1)',
+              'rgba(0, 63, 255, 1)',
+              'rgba(0, 0, 255, 1)',
+              'rgba(0, 0, 223, 1)',
+              'rgba(0, 0, 191, 1)',
+              'rgba(0, 0, 159, 1)',
+              'rgba(0, 0, 127, 1)',
+              'rgba(63, 0, 91, 1)',
+              'rgba(127, 0, 63, 1)',
+              'rgba(191, 0, 31, 1)',
+              'rgba(255, 0, 0, 1)',
+            ];
+        });
+      }
+
+      function addHeatMapData(){
         $.each( vehicle_theft_data.X, function( i, lng ) {
-            //var district = vehicle_theft_data.PdDistrict[i];
-            //heatmapData[district] = heatmapData[district] ? heatmapData[district] : [];
-            heatmapData[i] = new google.maps.LatLng(lat[i], lng);
+            var district = vehicle_theft_data.PdDistrict[i];
+            heatmapData[district].push(new google.maps.LatLng(lat[i], lng));
         });
 
-        //$.each( heatmapData, function(i, data){
-          heatmap = new google.maps.visualization.HeatmapLayer({
-            data: heatmapData
+        $.each( heatmap, function(i, district){
+          heatmap[i] = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData[district],
+            gradient: gradients[i]
           });
-          heatmap.setMap(null);
-          //heatmap[i].setMap(null);
-        //});
+          heatmap[i].setMap(null);
+          });
         
       };
 
       function toggleHeatmap() {
-        //$.each(heatmap, function(i,district){
-         // heatmap.setMap(heatmap.getMap() ? null : map);
 
-          if(heatmap.getMap()){
-            heatmap.setMap(null);
+          if(heatmap[1].getMap()){
+            $.each(heatmap,function(i,district){district.setMap(null)});
             $.each(district_markers,function(i,marker){
               marker.setVisible(true);
             });
@@ -52,7 +73,7 @@
             $.each(district_markers,function(i,marker){
               marker.setVisible(false);
             });
-            heatmap.setMap(map);
+            $.each(heatmap,function(i,district){district.setMap(map)});
           }
         //}); 
       }
@@ -138,10 +159,14 @@
           var zoomLevel = map.getZoom();
           document.getElementById('zoom_level').innerHTML = 'Zoom Level: ' + zoomLevel;
           
-          if(heatmap.getMap() || zoomLevel < 12 || zoomLevel > 13){
+          if(heatmap[1].getMap() || zoomLevel < 12 || zoomLevel > 13){
             $.each(district_markers,function(i,marker){
               marker.setVisible(false);
             });
+              if(heatmap[1].getMap()== null){
+                toggleHeatmap();
+              }
+
           }else{
             $.each(district_markers,function(i,marker){
               marker.setVisible(true);
@@ -225,9 +250,9 @@
       ).then(function() {//consider adding on fail or on progress function handling
 
         // All is ready now
-        addHeatMapData();
         addDistrictData();
-
+        initializeHeatMapArray();
+        addHeatMapData();
       });
 
     </script>
