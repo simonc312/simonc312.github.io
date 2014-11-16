@@ -18,10 +18,12 @@
       var vehicle_theft_data;
       var vehicle_theft_district_data;
       var lat;
-      var heatmap = []; //array of heatmaps per district
+      var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
       var district_markers = [];
       var gradients = [];
+      var heatmap_all;
+      var heatmapData_all = [];
 
       function initializeHeatMapArray(){
         $.each(vehicle_theft_district_data.PdDistrict, function(i, district){
@@ -48,8 +50,10 @@
 
       function addHeatMapData(){
         $.each( vehicle_theft_data.X, function( i, lng ) {
+            var location = new google.maps.LatLng(lat[i], lng);
             var district = vehicle_theft_data.PdDistrict[i];
-            heatmapData[district].push(new google.maps.LatLng(lat[i], lng));
+            heatmapData[district].push(location);
+            heatmapData_all.push(location);
         });
 
         $.each( heatmap, function(i, district){
@@ -59,13 +63,19 @@
           });
           heatmap[i].setMap(null);
           });
+
+        heatmap_all = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData_all
+          });
+          heatmap_all.setMap(null); 
         
       };
 
       function toggleHeatmap() {
 
-          if(heatmap[1].getMap()){
-            $.each(heatmap,function(i,district){district.setMap(null)});
+          if(heatmap_all.getMap()){
+            heatmap_all.setMap(null);
+            //$.each(heatmap,function(i,district){district.setMap(null)});
             $.each(district_markers,function(i,marker){
               marker.setVisible(true);
             });
@@ -73,7 +83,8 @@
             $.each(district_markers,function(i,marker){
               marker.setVisible(false);
             });
-            $.each(heatmap,function(i,district){district.setMap(map)});
+            heatmap_all.setMap(map);
+            //$.each(heatmap,function(i,district){district.setMap(map)});
           }
         //}); 
       }
@@ -97,11 +108,11 @@
           district_markers[i] = marker;
 
           google.maps.event.addListener(marker, 'mouseover', function() {
-              marker.opacity = 1;
+              heatmap[i].setMap(map);
           });
 
           google.maps.event.addListener(marker, 'mouseout', function() {
-              marker.opacity = 0.75;
+              heatmap[i].setMap(null);
           });
         }
       );
@@ -159,11 +170,11 @@
           var zoomLevel = map.getZoom();
           document.getElementById('zoom_level').innerHTML = 'Zoom Level: ' + zoomLevel;
           
-          if(heatmap[1].getMap() || zoomLevel < 12 || zoomLevel > 13){
+          if(heatmap_all.getMap() || zoomLevel < 12 || zoomLevel > 13){
             $.each(district_markers,function(i,marker){
               marker.setVisible(false);
             });
-              if(heatmap[1].getMap()== null){
+              if(heatmap_all.getMap()== null){
                 toggleHeatmap();
               }
 
