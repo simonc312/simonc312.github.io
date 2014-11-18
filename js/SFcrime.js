@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="/css/SFcrime.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS2PDfYwmOn1qzqc6V7kmisoUFLG6jLzA">
-    </script>
-
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=false">
-    </script>
-
-    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/src/markerwithlabel_packed.js"></script>
-
-    <script type="text/javascript">
+      var map;
       var vehicle_theft_data;
       var vehicle_theft_district_data;
       var lat;
@@ -251,15 +235,15 @@
       google.maps.event.addDomListener(window, 'load', initialize);
 
 
-           $.when(
+      $.when(
         // Get all the data points for vehicle thefts
-        $.getJSON('/assets/vehicle.theft.json', function(json) {
+        $.getJSON('../../assets/vehicle.theft.json', function(json) {
           vehicle_theft_data =  json;
           lat = vehicle_theft_data.Y;
         }),
 
         // Get the PdDistrict mean locations and numbers
-        $.getJSON("/assets/vehicle.theft.location.json", function(json) {
+        $.getJSON("../../assets/vehicle.theft.location.json", function(json) {
           vehicle_theft_district_data = json;
         })
 
@@ -271,16 +255,3 @@
         initializeHeatMapArray();
         addHeatMapData();
       });
-
-    </script>
-  </head>
-  <body>
-    <div id="map-canvas"></div>
-    <div id="legend">
-      SF Vehicle Thefts Visualization August - October 2014
-      <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-    </div>
-    <div id="zoom_level"></div>
-  </body>
-</html>
-
