@@ -1,5 +1,4 @@
-      var map;
-      var vehicle_theft_data;
+var vehicle_theft_data;
       var vehicle_theft_district_data;
       var lat;
       var curZoomLevel = 12;
@@ -84,7 +83,7 @@
             labelContent: "<div>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
             labelAnchor: new google.maps.Point(50, 10),
             labelClass: "labels", // the CSS class for the label
-            labelStyle: {opacity: 0.75},
+            labelStyle: {opacity: 0.9},
             labelInBackground: false
           });
 
@@ -127,9 +126,9 @@
           mapTypeId: google.maps.MapTypeId.ROAD
         };
 
-        map = new google.maps.Map($('#map-canvas'), mapOptions);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($('#legend'));
-        map.controls[google.maps.ControlPosition.LEFT_TOP].push($('#zoom_level'));
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
+        map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('zoom_level'));
         $('#zoom_level').text('Zoom Level: ' + curZoomLevel);
         map.setOptions(highLevelStyles);
 
@@ -235,7 +234,7 @@
       google.maps.event.addDomListener(window, 'load', initialize);
 
 
-      $.when(
+           $.when(
         // Get all the data points for vehicle thefts
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
           vehicle_theft_data =  json;
