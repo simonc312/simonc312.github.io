@@ -7,7 +7,7 @@ html, body, #map-canvas {
   padding: 10px;
 }
 
-.labels{
+.district_labels{
  color: white;
  background-color: transparent;
  font-family: "Lucida Grande", "Arial", sans-serif;
@@ -18,6 +18,24 @@ html, body, #map-canvas {
  white-space: nowrap;
  text-shadow: 2px 2px 2px rgba(0,0,0,1);
 }
+
+.unique_labels{
+ color: black;
+ background-color: white;
+ font-family: "Lucida Grande", "Arial", sans-serif;
+ font-size: 12px;
+ font-weight: bold;
+ text-align: center;
+ width: 100px;     
+ white-space: nowrap;
+ text-shadow: 2px 2px 2px rgba(0,0,0,1);
+}
+
+.unique_labels:hover{
+ color: white;
+ background-color: black;
+}
+
 
 .district_total{
   color: white;

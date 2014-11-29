@@ -1,13 +1,21 @@
-var vehicle_theft_data;
+      var vehicle_theft_data;
+      var vehicle_theft_date_data;
       var vehicle_theft_district_data;
       var lat;
       var curZoomLevel = 12;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
       var district_markers = [];
+      var unique_markers = [];
       var gradients = [];
       var heatmap_all;
       var heatmapData_all = [];
+      var lastValidCenter;
+    // bounds of the desired area
+      var allowedBounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(37.590059187414685, -122.63448208007815),
+          new google.maps.LatLng(37.80174049420249, -122.3091720214844)
+      );
 
       function initializeHeatMapArray(){
         $.each(vehicle_theft_district_data.PdDistrict, function(i, district){
@@ -55,20 +63,44 @@ var vehicle_theft_data;
         
       };
 
-      function toggleHeatmap() {
+      function addUniqueData(){
+        $.each( vehicle_theft_date_data.Descript, function( i, description){
+          var loc = heatmapData_all[i];
+          var time = vehicle_theft_date_data.Time;
+          var date = vehicle_theft_date_data.Date;
+          var day = vehicle_theft_date_data.DayOfWeek;
+          var address = vehicle_theft_date_data.Address;
+          var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time +"</div>"+ "</div>"
+          var marker = new MarkerWithLabel({
+            position: loc,
+            map: map,
+            title: description,
+            //animation: google.maps.Animation.DROP,
+            //icon: 
+            labelContent: labelDivs,
+            labelAnchor: new google.maps.Point(50, 20),
+            labelClass: "unique_labels", // the CSS class for the label
+            //labelStyle: {opacity: 0.0},
+            labelInBackground: false,
+            labelVisible: false,
+            visible: false
+          });
 
-          if(heatmap_all.getMap()){
-            heatmap_all.setMap(null);
-            $.each(district_markers,function(i,marker){
-              marker.setVisible(true);
-            });
-          }else{
-            $.each(district_markers,function(i,marker){
-              marker.setVisible(false);
-            });
-            heatmap_all.setMap(map);
-          }
-      }
+          unique_markers[i] = marker;
+
+          google.maps.event.addListener(marker, 'mouseover', function() {
+              marker.labelVisible = true;
+              
+          });
+
+          google.maps.event.addListener(marker, 'mouseout', function() {
+              marker.labelVisible = false;
+          });
+        }
+      );
+     };
+
+
 
      function addDistrictData(){
       $.each( vehicle_theft_district_data.PdDistrict, function( i, district){
@@ -82,12 +114,19 @@ var vehicle_theft_data;
             icon: getCircle(magnitude,'red',.4),
             labelContent: "<div>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
             labelAnchor: new google.maps.Point(50, 10),
-            labelClass: "labels", // the CSS class for the label
+            labelClass: "district_labels", // the CSS class for the label
             labelStyle: {opacity: 0.9},
             labelInBackground: false
           });
 
           district_markers[i] = marker;
+
+          google.maps.event.addListener(marker, 'click', function() {
+              //marker.setIcon(getCircle(magnitude,'transparent',.1));
+              marker.setVisible(false);
+              map.setCenter(marker.position);
+              map.setZoom(15);
+          });
 
           google.maps.event.addListener(marker, 'mouseover', function() {
               marker.setIcon(getCircle(magnitude,'transparent',.1));
@@ -112,10 +151,89 @@ var vehicle_theft_data;
           strokeWeight: 0
         };
       };
+
+      function setMarkersVisible(markers,state){
+         $.each(markers,function(i,marker){
+              marker.setVisible(state);
+            });
+      }
+
+      function setHeatmapVisible(state){
+        if(state)
+          heatmap_all.setMap(map);
+        else
+          heatmap_all.setMap(null);
+      }
+
+      function toggleHeatmap() {
+
+          if(heatmap_all.getMap()){
+            setHeatmapVisible(false);
+            setMarkersVisible(district_markers,true);
+          }else{
+            setMarkersVisible(district_markers,false);
+            setHeatmapVisible(true);
+          }
+      }
+
+      function toggleMarkers(markers){
+        if(markers[0].getVisible())
+          setMarkersVisible(markers,false);
+        else
+          setMarkersVisible(markers,true);
+      }
+
+      function toggleUniqueMarkers(){
+        toggleMarkers(unique_markers);
+      }
+
+      function toggleDistrictMarkers(){
+        toggleMarkers(district_markers);
+      }
      
+      function centerChangedEventHandler() {
+            if (allowedBounds.contains(map.getCenter())) {
+              // still within valid bounds, so save the last valid position
+              lastValidCenter = map.getCenter();
+            } else{
+              // not valid anymore => return to last valid position
+              map.panTo(lastValidCenter);
+            }
+        }
+
+      function zoomChangeEventHandler() {
+          var zoomLevel = map.getZoom();
+          $('#zoom_level').text('Zoom Level: ' + zoomLevel);
+
+          //conditions to turn on district view
+          if(zoomLevel <=13){
+            if(heatmap_all.getMap() && zoomLevel > curZoomLevel) //curZoomLevel is 14
+              toggleHeatmap();
+          }
+          //conditions to turn on heat map view
+          if(zoomLevel == 14){
+            if(zoomLevel < curZoomLevel) //curZoomLevel is 15
+              toggleUniqueMarkers(); //turn off
+            if(heatmap_all.getMap() == null) //if off turn on
+              toggleHeatmap();
+          }
+          //conditions to turn on unique markers view
+          if(zoomLevel >=15){
+            if(heatmap_all.getMap()) //turn off heat map view
+              setHeatmapVisible(false);
+            if(unique_markers[0].getVisible() == false)
+              toggleUniqueMarkers(); //turn on
+          }
+
+          if (zoomLevel > 10)
+              map.setOptions(highLevelStyles);
+          else
+              map.setOptions(lowLevelStyles);
+
+          curZoomLevel = zoomLevel;
+        }
     
       function initialize() {
-
 
         var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
         var mapOptions = {
@@ -127,58 +245,16 @@ var vehicle_theft_data;
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('legend'));
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('legend'));
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('zoom_level'));
         $('#zoom_level').text('Zoom Level: ' + curZoomLevel);
         map.setOptions(highLevelStyles);
 
-          // bounds of the desired area
-      var allowedBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(37.590059187414685, -122.63448208007815),
-          new google.maps.LatLng(37.80174049420249, -122.3091720214844)
-      );
-      var lastValidCenter = map.getCenter();
+        lastValidCenter = map.getCenter();
 
-      google.maps.event.addListener(map, 'center_changed', function() {
-          if (allowedBounds.contains(map.getCenter())) {
-            // still within valid bounds, so save the last valid position
-            lastValidCenter = map.getCenter();
-          } else{
-            // not valid anymore => return to last valid position
-            map.panTo(lastValidCenter);
-          }
-      });
+        google.maps.event.addListener(map, 'center_changed', centerChangedEventHandler);
 
-        google.maps.event.addListener(map, 'zoom_changed', function () {
-          var zoomLevel = map.getZoom();
-          $('#zoom_level').text('Zoom Level: ' + zoomLevel);
-          
-          if((heatmap_all.getMap() && zoomLevel > curZoomLevel) || zoomLevel < 12 || zoomLevel > 13){
-            $.each(district_markers,function(i,marker){
-              marker.setVisible(false);
-            });
-              if(heatmap_all.getMap()== null){
-                toggleHeatmap();
-              }
-
-          }else{
-
-              if(heatmap_all.getMap()){
-                toggleHeatmap();
-              }
-
-            $.each(district_markers,function(i,marker){
-              marker.setVisible(true);
-            });
-          }
-
-          if (zoomLevel > 10) {
-              map.setOptions(highLevelStyles);
-          } else {
-              map.setOptions(lowLevelStyles);
-          }
-          curZoomLevel = zoomLevel;
-        });
+        google.maps.event.addListener(map, 'zoom_changed', zoomChangeEventHandler);
       }
 
       var highLevelStyles = {
@@ -244,6 +320,10 @@ var vehicle_theft_data;
         // Get the PdDistrict mean locations and numbers
         $.getJSON("../../assets/vehicle.theft.location.json", function(json) {
           vehicle_theft_district_data = json;
+        }),
+
+        $.getJSON("../../assets/vehicle.theft.date.json", function(json) {
+          vehicle_theft_date_data = json;
         })
 
 
@@ -253,4 +333,5 @@ var vehicle_theft_data;
         addDistrictData();
         initializeHeatMapArray();
         addHeatMapData();
+        addUniqueData();
       });
