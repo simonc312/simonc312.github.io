@@ -84,7 +84,7 @@
           var isAM = data[ISAM];
           var date = data[DATE];
           var day  = data[DAY];
-          var address   = data[ADDRESS];
+          var address   = data[ADDR];
           var description = data[DESC];
           var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time + " " + isAM +"</div>"+ "</div>"
           var marker    = new MarkerWithLabel({
@@ -348,5 +348,5 @@
         addDistrictData();
         initializeHeatMapArray();
         addHeatMapData();
-        //addUniqueData();
+        addUniqueData();
       });
