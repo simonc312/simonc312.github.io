@@ -1,7 +1,19 @@
+      //constants for indices of vehicle_theft_data element fields 
+      var LONGITUDE = 0;
+      var LATITUDE  = 1;
+      var DISTRICT  = 2;
+
+      //constants for indices of vehicle theft date data element fields
+      var DAY  = 0;
+      var DATE = 1;
+      var TIME = 2;
+      var DESC = 3;
+      var ADDR = 4;
+      var ISAM = 5;
+      
       var vehicle_theft_data;
       var vehicle_theft_date_data;
       var vehicle_theft_district_data;
-      var lat;
       var curZoomLevel = 12;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
@@ -9,7 +21,7 @@
       var unique_markers = [];
       var gradients = [];
       var heatmap_all;
-      var heatmapData_all = [];
+      var heatmapData_all = []; //used for toggling heatmap display mode from district view or individual markers
       var lastValidCenter;
     // bounds of the desired area
       var allowedBounds = new google.maps.LatLngBounds(
@@ -41,9 +53,11 @@
       }
 
       function addHeatMapData(){
-        $.each( vehicle_theft_data.X, function( i, lng ) {
-            var location = new google.maps.LatLng(lat[i], lng);
-            var district = vehicle_theft_data.PdDistrict[i];
+        $.each( vehicle_theft_data, function(i,data) {
+            var lat = data[LATITUDE];
+            var lng = data[LONGITUDE];
+            var location = new google.maps.LatLng(lat, lng);
+            var district = data[DISTRICT]; 
             heatmapData[district].push(location);
             heatmapData_all.push(location);
         });
@@ -64,14 +78,16 @@
       };
 
       function addUniqueData(){
-        $.each( vehicle_theft_date_data.Descript, function( i, description){
-          var loc = heatmapData_all[i];
-          var time = vehicle_theft_date_data.Time;
-          var date = vehicle_theft_date_data.Date;
-          var day = vehicle_theft_date_data.DayOfWeek;
-          var address = vehicle_theft_date_data.Address;
-          var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time +"</div>"+ "</div>"
-          var marker = new MarkerWithLabel({
+        $.each( vehicle_theft_date_data, function( i, data){
+          var loc  = heatmapData_all[i];
+          var time = data[TIME];
+          var isAM = data[ISAM];
+          var date = data[DATE];
+          var day  = data[DAY];
+          var address   = data[ADDRESS];
+          var description = data[DESC];
+          var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time + " " + isAM +"</div>"+ "</div>"
+          var marker    = new MarkerWithLabel({
             position: loc,
             map: map,
             title: description,
@@ -314,7 +330,6 @@
         // Get all the data points for vehicle thefts
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
           vehicle_theft_data =  json;
-          lat = vehicle_theft_data.Y;
         }),
 
         // Get the PdDistrict mean locations and numbers
@@ -333,5 +348,5 @@
         addDistrictData();
         initializeHeatMapArray();
         addHeatMapData();
-        addUniqueData();
+        //addUniqueData();
       });
