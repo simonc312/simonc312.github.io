@@ -26,16 +26,11 @@ html, body, #map-canvas {
  font-size: 12px;
  font-weight: bold;
  text-align: center;
- width: 100px;     
+ width: 200px;     
  white-space: nowrap;
- text-shadow: 2px 2px 2px rgba(0,0,0,1);
+ margin: 0 auto;
+ text-shadow: 1px 1px 1px rgba(0,0,0,1);
 }
-
-.unique_labels:hover{
- color: white;
- background-color: black;
-}
-
 
 .district_total{
   color: white;

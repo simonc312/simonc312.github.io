@@ -28,6 +28,67 @@
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
           new google.maps.LatLng(37.80174049420249, -122.3091720214844)
       );
+      var marker_icons = [ {'name': 'STOLEN AUTOMOBILE', 'icon': '../../assets/sf_crime_icons/car.png'},
+                           {'name': 'ATTEMPTED STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car-attempted.png'},
+                           {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png'},
+                           {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png'},
+                           {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png'}]
+      //lunar landing stype from snazzy maps 
+      var nightStyles = {
+        styles: [{"stylers":[{"hue":"#ff1a00"},{"invert_lightness":true},{"saturation":-100},{"lightness":33},{"gamma":0.5}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#2D333C"}]}]
+      };
+
+      var highLevelStyles = {
+        styles: [{
+            'featureType': 'all',
+                'elementType': 'labels',
+                'stylers': [{
+                'visibility': 'on'
+            }]
+        }]
+      };
+      //pale dawn style from snazzy maps
+      var dayStyles = {styles: [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}]
+      };
+
+      function addDistrictData(){
+        $.each( vehicle_theft_district_data.PdDistrict, function( i, district){
+            var loc = new google.maps.LatLng(vehicle_theft_district_data.Y[i], vehicle_theft_district_data.X[i]);
+            var magnitude = vehicle_theft_district_data.Total[i];
+            var marker = new MarkerWithLabel({
+              position: loc,
+              map: map,
+              title: district,
+              animation: google.maps.Animation.DROP,
+              icon: getCircle(magnitude,'red',.4),
+              labelContent: "<div>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
+              labelAnchor: new google.maps.Point(50, 10),
+              labelClass: "district_labels", // the CSS class for the label
+              labelStyle: {opacity: 0.9},
+              labelInBackground: false
+            });
+
+            district_markers[i] = marker;
+
+            google.maps.event.addListener(marker, 'click', function() {
+                //marker.setIcon(getCircle(magnitude,'transparent',.1));
+                marker.setVisible(false);
+                map.setCenter(marker.position);
+                map.setZoom(15);
+            });
+
+            google.maps.event.addListener(marker, 'mouseover', function() {
+                marker.setIcon(getCircle(magnitude,'transparent',.1));
+                heatmap[i].setMap(map);
+            });
+
+            google.maps.event.addListener(marker, 'mouseout', function() {
+                heatmap[i].setMap(null);
+                marker.setIcon(getCircle(magnitude,'red',.4));
+            });
+          }
+        );
+       };
 
       function initializeHeatMapArray(){
         $.each(vehicle_theft_district_data.PdDistrict, function(i, district){
@@ -77,6 +138,14 @@
         
       };
 
+      function getUniqueIcon(description){
+        for(var i=0; i<marker_icons.length;i++){
+          if(marker_icons[i].name === description)
+            return marker_icons[i].icon
+        }
+        return marker_icons[0].icon
+      }
+
       function addUniqueData(){
         $.each( vehicle_theft_date_data, function( i, data){
           var loc  = heatmapData_all[i];
@@ -87,12 +156,18 @@
           var address   = data[ADDR];
           var description = data[DESC];
           var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time + " " + isAM +"</div>"+ "</div>"
+          var image = {
+            url: getUniqueIcon(description),
+            size: new google.maps.Size(32, 37),
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(16, 37)
+          };
           var marker    = new MarkerWithLabel({
             position: loc,
             map: map,
             title: description,
             //animation: google.maps.Animation.DROP,
-            //icon: 
+            icon: image, 
             labelContent: labelDivs,
             labelAnchor: new google.maps.Point(50, 20),
             labelClass: "unique_labels", // the CSS class for the label
@@ -117,46 +192,6 @@
      };
 
 
-
-     function addDistrictData(){
-      $.each( vehicle_theft_district_data.PdDistrict, function( i, district){
-          var loc = new google.maps.LatLng(vehicle_theft_district_data.Y[i], vehicle_theft_district_data.X[i]);
-          var magnitude = vehicle_theft_district_data.Total[i];
-          var marker = new MarkerWithLabel({
-            position: loc,
-            map: map,
-            title: district,
-            animation: google.maps.Animation.DROP,
-            icon: getCircle(magnitude,'red',.4),
-            labelContent: "<div>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
-            labelAnchor: new google.maps.Point(50, 10),
-            labelClass: "district_labels", // the CSS class for the label
-            labelStyle: {opacity: 0.9},
-            labelInBackground: false
-          });
-
-          district_markers[i] = marker;
-
-          google.maps.event.addListener(marker, 'click', function() {
-              //marker.setIcon(getCircle(magnitude,'transparent',.1));
-              marker.setVisible(false);
-              map.setCenter(marker.position);
-              map.setZoom(15);
-          });
-
-          google.maps.event.addListener(marker, 'mouseover', function() {
-              marker.setIcon(getCircle(magnitude,'transparent',.1));
-              heatmap[i].setMap(map);
-          });
-
-          google.maps.event.addListener(marker, 'mouseout', function() {
-              heatmap[i].setMap(null);
-              marker.setIcon(getCircle(magnitude,'red',.4));
-          });
-        }
-      );
-     };
-
      function getCircle(magnitude,fColor,fOpacity) {
         return {
           path: google.maps.SymbolPath.CIRCLE,
@@ -179,6 +214,11 @@
           heatmap_all.setMap(map);
         else
           heatmap_all.setMap(null);
+      }
+
+      function toggleNightStyle(){
+        map.setOptions(nightStyles);
+        map.setOptions(highLevelStyles);
       }
 
       function toggleHeatmap() {
@@ -222,8 +262,8 @@
           $('#zoom_level').text('Zoom Level: ' + zoomLevel);
 
           //conditions to turn on district view
-          if(zoomLevel <=13){
-            if(heatmap_all.getMap() && zoomLevel > curZoomLevel) //curZoomLevel is 14
+          if(zoomLevel <= 13){
+            if(heatmap_all.getMap() && zoomLevel < curZoomLevel) //curZoomLevel is 14
               toggleHeatmap();
           }
           //conditions to turn on heat map view
@@ -234,17 +274,12 @@
               toggleHeatmap();
           }
           //conditions to turn on unique markers view
-          if(zoomLevel >=15){
+          if(zoomLevel >= 15){
             if(heatmap_all.getMap()) //turn off heat map view
               setHeatmapVisible(false);
             if(unique_markers[0].getVisible() == false)
               toggleUniqueMarkers(); //turn on
           }
-
-          if (zoomLevel > 10)
-              map.setOptions(highLevelStyles);
-          else
-              map.setOptions(lowLevelStyles);
 
           curZoomLevel = zoomLevel;
         }
@@ -259,12 +294,22 @@
           streetViewControl: false,
           mapTypeId: google.maps.MapTypeId.ROAD
         };
-
+        var legend = document.getElementById('legend');
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('legend'));
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('zoom_level'));
+        map.setOptions(dayStyles);
+
+        $.each(marker_icons, function(i,marker){
+          var name = marker.name;
+          var icon = marker.icon;
+          var div = document.createElement('div');
+          div.innerHTML = '<img src="' + icon + '"> ' + name;
+          legend.appendChild(div);
+        });
+
         $('#zoom_level').text('Zoom Level: ' + curZoomLevel);
-        map.setOptions(highLevelStyles);
+        
 
         lastValidCenter = map.getCenter();
 
@@ -273,60 +318,9 @@
         google.maps.event.addListener(map, 'zoom_changed', zoomChangeEventHandler);
       }
 
-      var highLevelStyles = {
-        styles: [{
-            'featureType': 'all',
-                'elementType': 'labels',
-                'stylers': [{
-                'visibility': 'on'
-            }]
-        }]
-    };
-
-    var lowLevelStyles = {
-        styles: [{
-            'featureType': 'all',
-                'elementType': 'labels',
-                'stylers': [{
-                'visibility': 'off'
-            }]
-        }, {
-            'featureType': 'road',
-                'elementType': 'labels.icon',
-                'stylers': [{
-                'visibility': 'off'
-            }]
-        }, {
-            'stylers': [{
-                'hue': '#00aaff'
-            }, {
-                'saturation': -50
-            }, {
-                'gamma': 1.15
-            }, {
-                'lightness': 12
-            }]
-        }, {
-            'featureType': 'road',
-                'elementType': 'labels.text.fill',
-                'stylers': [{
-                'visibility': 'on'
-            }, {
-                'lightness': 24
-            }]
-        }, {
-            'featureType': 'road',
-                'elementType': 'geometry',
-                'stylers': [{
-                'lightness': 85
-            }]
-        }]
-    };
-
       google.maps.event.addDomListener(window, 'load', initialize);
 
-
-           $.when(
+      $.when(
         // Get all the data points for vehicle thefts
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
           vehicle_theft_data =  json;
