@@ -29,6 +29,10 @@ navigation:
   url: /about/
   glyph: 'glyphicon glyphicon-user'
   color: blue
+- text: SITES
+  url: /sites/
+  glyph: 'glyphicon glyphicon-cloud'
+  color: orange
 
 other-sites:
 - text: flickr
