@@ -5,6 +5,7 @@ permalink:   pretty
 exclude: ['images']
 #Setup
 title:       Simon Chen
+img:         /assets/profile-picture.jpg
 tagline:     'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
 subscribe:   Subscribe
 url:         http://localhost:4000
@@ -28,6 +29,14 @@ navigation:
   url: /about/
   glyph: 'glyphicon glyphicon-user'
   color: blue
+
+other-sites:
+- text: flickr
+  url: https://www.flickr.com/photos/floatingon
+- text: 500px
+  url: http://500px.com/SimonChen1
+- text: Simon Chen Photography
+  url: https://www.facebook.com/simonchenphotography
 
 footer-links:
   github: simonc312

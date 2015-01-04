@@ -31,7 +31,14 @@
 				                    <li><a  href="/projects/d3">Programming Language Paradigm Map with D3</a></li>
 				                    <li><a  href="/projects/sf_crime">SF Crime Data Analysis with Google Maps API</a></li>
 				                </ul>
-				                
+
+				                <p>Photography Sites.</p>
+				                <ul>
+					                {% for link in site.other-sites %}
+										<li><a href="{{link.url}}">{{link.text}}</a></li>
+										<li class="divider"></li>
+									{% endfor %}
+				                </ul>
             			</div>	
 					</div>
 					{{ content }}

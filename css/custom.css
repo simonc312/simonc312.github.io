@@ -6,7 +6,10 @@
 html, body { height: 100%; }
 .no-underline { text-decoration: none; }
 
-.banner{background-color:#ADD8E6 ;margin-top:20px;padding-top:20px; }
+.banner{background-color:#ADD8E6 ;
+  margin-top:20px;
+  padding-top:20px;
+  vertical-align:middle; }
 .background-pattern{background-image: url("/assets/gplaypattern.png");
 background-repeat:repeat; }
 
@@ -37,12 +40,24 @@ height:100%;
     #site-submenu {
       visibility: hidden;
   }
+
+  .float-img {
+  float: left;
+  margin: 0 auto;
+  width: 80px;
+  }
 }
 
 
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
+
+  .float-img {
+  float: left;
+  margin: 0 auto;
+  width: 100px;
+  }
 
   .container-fluid {height:100%;}
   .container-fluid .row {height:100%;}
@@ -119,6 +134,8 @@ height:100%;
       -webkit-transform: translateZ(0) translateX(200px);  
       transform: translateZ(0) translateX(200px);  
   }
+
+
 
 }
 

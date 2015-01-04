@@ -35,9 +35,10 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-cloud orange"></span>SITES<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="https://www.flickr.com/photos/floatingon">flickr</a></li>
-						<li class="divider"></li>
-						<li><a href="http://500px.com/SimonChen1">500px</a></li>
+						{% for link in site.other-sites %}
+							<li><a href="{{link.url}}">{{link.text}}</a></li>
+							<li class="divider"></li>
+						{% endfor %}
 					</ul>
 			  	</li>
 			</ul>
