@@ -9,6 +9,7 @@ html, body { height: 100%; }
 .banner{background-color:#ADD8E6 ;
   margin-top:20px;
   padding-top:20px;
+  padding-bottom:20px;
   vertical-align:middle; }
 .background-pattern{background-image: url("/assets/gplaypattern.png");
 background-repeat:repeat; }
@@ -41,23 +42,23 @@ height:100%;
       visibility: hidden;
   }
 
-  .float-img {
-  float: left;
-  margin: 0 auto;
-  width: 80px;
-  }
 }
 
+  img.float {
+  float: left;
+  vertical-align: middle;
+  width: 100px;
+  }
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
 
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
-
-  .float-img {
-  float: left;
-  margin: 0 auto;
-  width: 100px;
-  }
 
   .container-fluid {height:100%;}
   .container-fluid .row {height:100%;}

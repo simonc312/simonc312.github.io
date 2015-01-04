@@ -6,10 +6,12 @@
 				<p>{{ page.tagline }}</p>
 			{% else %}
 				<div itemscope itemtype="http://data-vocabulary.org/Person">
-					<img class="float-img" itemprop="photo" src="{{ site.img }}" alt="Profile Picture">
-					<title itemprop="name">{{ site.title }}</title>
-					<h1> {{ site.title }} <h1>
-					<p>{{ site.tagline }}</p>
+					<span class="helper"><img class="float" itemprop="photo" src="{{ site.img }}" alt="Profile Picture"></span>
+					<span class="helper">
+					 	<title itemprop="name">{{ site.title }}</title>
+						<h1> {{ site.title }} <h1>
+						<p>{{ site.tagline }}</p>
+					</span>
 				</div>
 			{% endif %}
 			
