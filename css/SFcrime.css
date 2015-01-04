@@ -2,9 +2,29 @@ html, body, #map-canvas {
  height: 100%; margin: 0; padding: 0;
 }
 
-#legend, #zoom_level {
+#legend>div>h3{
+	text-align: center;
+}
+
+#zoom_level {
   background: white;
   padding: 10px;
+  margin: 10px;
+}
+
+#legend {
+  background: white;
+  padding: 10px;
+  margin: 10px;
+  display: block;
+}
+
+#legend>div>img{
+	vertical-align: middle;
+}
+
+#legend>span{
+	padding: 50px;
 }
 
 .district_labels{
@@ -28,8 +48,8 @@ html, body, #map-canvas {
  text-align: center;
  width: 200px;     
  white-space: nowrap;
+ padding: 10px;
  margin: 0 auto;
- text-shadow: 1px 1px 1px rgba(0,0,0,1);
 }
 
 .district_total{

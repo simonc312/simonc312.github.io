@@ -33,6 +33,8 @@
                            {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png'},
                            {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png'},
                            {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png'}]
+      
+      var isDay = true;
       //lunar landing stype from snazzy maps 
       var nightStyles = {
         styles: [{"stylers":[{"hue":"#ff1a00"},{"invert_lightness":true},{"saturation":-100},{"lightness":33},{"gamma":0.5}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#2D333C"}]}]
@@ -179,14 +181,18 @@
 
           unique_markers[i] = marker;
 
-          google.maps.event.addListener(marker, 'mouseover', function() {
+          google.maps.event.addListener(marker, 'click', function() {
+              if(marker.labelVisible){
+                marker.labelVisible = false;
+              marker.labelInBackground = false;
+            }else{
               marker.labelVisible = true;
+              map.setCenter(marker.getPosition());
+            }
               
           });
 
-          google.maps.event.addListener(marker, 'mouseout', function() {
-              marker.labelVisible = false;
-          });
+       
         }
       );
      };
@@ -216,9 +222,12 @@
           heatmap_all.setMap(null);
       }
 
-      function toggleNightStyle(){
-        map.setOptions(nightStyles);
-        map.setOptions(highLevelStyles);
+      function toggleMapStyle(){
+        if(isDay)
+          map.setOptions(nightStyles);
+        else
+          map.setOptions(dayStyles);
+        isDay = !isDay;
       }
 
       function toggleHeatmap() {
@@ -263,8 +272,13 @@
 
           //conditions to turn on district view
           if(zoomLevel <= 13){
-            if(heatmap_all.getMap() && zoomLevel < curZoomLevel) //curZoomLevel is 14
-              toggleHeatmap();
+            if(zoomLevel < curZoomLevel){
+              if(heatmap_all.getMap())
+                toggleHeatmap(); //turn off
+              else if(unique_markers[0].getVisible())
+                toggleUniqueMarkers(); //turn off
+            } else if(district_markers[0].getVisible())
+              toggleDistrictMarkers();
           }
           //conditions to turn on heat map view
           if(zoomLevel == 14){
