@@ -37,14 +37,26 @@ html, body, #map-canvas {
 }
 
 .infowindow{
- font-family: "Lucida Grande", "Arial", sans-serif;    
- white-space: nowrap;
- padding: 10px;
- margin: 0 auto;
+	font-family: "Lucida Grande", "Arial", sans-serif;    
+	padding: 10px;
+	max-height:250px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .infowindow>div>span{
 	font-weight: bold;
+}
+
+.min-width{
+	min-width:200px;
+}
+
+.border-row {
+	padding-top: 5px;
+	padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 .district_total{

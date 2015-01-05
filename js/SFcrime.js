@@ -38,7 +38,7 @@
       //only one infowindow needed to avoid clutter
       var infowindow = new google.maps.InfoWindow(
           {
-            size: new google.maps.Size(50,50)
+            maxWidth: 300
           });
 
       var isDay = true;
@@ -89,12 +89,15 @@
               if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
                 marker.setIcon(getCircle(magnitude,'red',.4));
+                infowindow.close();
               }
               else{
                 marker.setIcon(getCircle(magnitude,'transparent',.1));
                 heatmap[i].setMap(map);
-                //infowindow.setContent(getDistrictBio(district));
-                //infowindow.open(map,marker);
+                map.panTo(loc);
+                infowindow.close();
+                infowindow.setContent(getDistrictBio(district));
+                infowindow.open(map,marker);
               }
             });
           }
@@ -154,12 +157,17 @@
           var district_obj = sf_district_bios[i];
           if(district_obj.district === district){
             var content = document.createElement('div');
-            content.className = "infowindow";
-            for(var index=0;index< district_object.full_name;index++){
+            content.className = "infowindow min-width";
+            for(var index=0;index< district_obj.full_name.length;index++){
+              var unique_id = "#foo"+index+""+i
+              var clickLink = "<a href='"+unique_id+"' class='btn btn-default' data-toggle='collapse'>"+district_obj.full_name[index]+"</a>" 
               var innerDiv = document.createElement('div');
-              innerDiv.innerHTML =  "<h4>"+district_obj.full_name[index]+"</h4>"+
-                                    "<div>"+district_obj.description[index]+"</div>"+
-                                    '<a href="'+district_obj.url[index]+'">Read more</a>'
+              innerDiv.className = "border-row";
+              innerDiv.innerHTML =  clickLink +
+                                    "<div id='#foo"+unique_id+"' class='collapse'>"+
+                                      "<div><p>"+district_obj.description[index]+"</p></div>"+
+                                      '<a href="'+district_obj.url[index]+'" target="_blank">Read more</a>'+
+                                    "</div>"
               content.appendChild(innerDiv);
             }
             return content;
