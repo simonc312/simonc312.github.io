@@ -8,8 +8,8 @@ html, body, #map-canvas {
   margin: 10px;
 }
 
-#legend {
-  display: block;
+#panel>span{
+  padding: 50px;
 }
 
 #legend>div>img{
@@ -20,8 +20,17 @@ html, body, #map-canvas {
   text-align: center;
 }
 
-#legend>span{
-  padding: 50px;
+.slide {
+	overflow-y: hidden;
+	max-height: 500px; /* approximate max height */
+
+	transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+.hide{
+	max-height: 0;
 }
 
 .district_labels{
@@ -39,7 +48,9 @@ html, body, #map-canvas {
 .infowindow{
 	font-family: "Lucida Grande", "Arial", sans-serif;    
 	padding: 10px;
+	margin: 0 auto;
 	max-height:250px;
+	max-width: 250px;
 	overflow: auto;
 	overflow-x: hidden;
 	overflow-y: auto;

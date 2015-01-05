@@ -89,15 +89,14 @@
               if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
                 marker.setIcon(getCircle(magnitude,'red',.4));
-                infowindow.close();
+                $('#district_bio').addClass('hide');
               }
               else{
                 marker.setIcon(getCircle(magnitude,'transparent',.1));
                 heatmap[i].setMap(map);
-                map.panTo(loc);
-                infowindow.close();
-                infowindow.setContent(getDistrictBio(district));
-                infowindow.open(map,marker);
+                $('#district_bio').addClass(district);
+                $('#district_bio').html(getDistrictBio(district));
+                $('#district_bio').removeClass('hide');
               }
             });
           }
@@ -158,16 +157,14 @@
           if(district_obj.district === district){
             var content = document.createElement('div');
             content.className = "infowindow min-width";
+            content.innerHTML = "<h3>"+district+" District Bio<h3>";
             for(var index=0;index< district_obj.full_name.length;index++){
-              var unique_id = "#foo"+index+""+i
-              var clickLink = "<a href='"+unique_id+"' class='btn btn-default' data-toggle='collapse'>"+district_obj.full_name[index]+"</a>" 
               var innerDiv = document.createElement('div');
               innerDiv.className = "border-row";
-              innerDiv.innerHTML =  clickLink +
-                                    "<div id='#foo"+unique_id+"' class='collapse'>"+
-                                      "<div><p>"+district_obj.description[index]+"</p></div>"+
-                                      '<a href="'+district_obj.url[index]+'" target="_blank">Read more</a>'+
-                                    "</div>"
+              innerDiv.innerHTML =  "<h4>"+district_obj.full_name[index]+"</h4>"+
+                                    "<div><p>"+district_obj.description[index]+"</p></div>"+
+                                    '<a href="'+district_obj.url[index]+'" target="_blank">Read more</a>'
+                                    
               content.appendChild(innerDiv);
             }
             return content;
@@ -313,10 +310,14 @@
           }
           //conditions to turn on unique markers view
           if(zoomLevel >= 15){
+            $('#legend').removeClass('hide');
             if(heatmap_all.getMap()) //turn off heat map view
               setHeatmapVisible(false);
             if(unique_markers[0].getVisible() == false)
               toggleUniqueMarkers(); //turn on
+          }else{
+            if(!$('#legend').hasClass('hide'))
+              $('#legend').addClass('hide');
           }
 
         //infowindow only relevant when zoom is high enough to see symbols
@@ -325,6 +326,20 @@
         }
           curZoomLevel = zoomLevel;
         }
+
+      function setUpLegend(){
+        var legend = document.getElementById('legend');
+        var container = document.createElement('div');
+        container.className = 'infowindow';
+        $.each(marker_icons, function(i,marker){
+          var name = marker.name;
+          var icon = marker.icon;
+          var div = document.createElement('div');
+          div.innerHTML = '<img src="' + icon + '"> ' + name;
+          container.appendChild(div);
+        });
+        legend.appendChild(container);
+      }
     
       function initialize() {
 
@@ -336,20 +351,14 @@
           streetViewControl: false,
           mapTypeId: google.maps.MapTypeId.ROAD
         };
-        var legend = document.getElementById('legend');
+        
+        setUpLegend();
+
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+        map.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('panel'));
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('zoom_level'));
         map.setOptions(dayStyles);
-        // setup legend 
-        $.each(marker_icons, function(i,marker){
-          var name = marker.name;
-          var icon = marker.icon;
-          var div = document.createElement('div');
-          div.innerHTML = '<img src="' + icon + '"> ' + name;
-          legend.appendChild(div);
-        });
-
+        
         $('#zoom_level').text('Zoom Level: ' + curZoomLevel);
         lastValidCenter = map.getCenter();
         google.maps.event.addListener(map, 'center_changed', centerChangedEventHandler);
