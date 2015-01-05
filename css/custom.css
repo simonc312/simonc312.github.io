@@ -6,26 +6,43 @@
 html, body { height: 100%; }
 .no-underline { text-decoration: none; }
 
-.banner{background-color:#ADD8E6 ;
+.banner{
+  background-color:#ADD8E6 ;
   margin-top:20px;
   padding-top:20px;
   padding-bottom:20px;
-  vertical-align:middle; }
-.background-pattern{background-image: url("/assets/gplaypattern.png");
-background-repeat:repeat; }
+  vertical-align:middle; 
+}
+
+img.float {
+  float: left;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.background-pattern{
+  background-image: url("/assets/gplaypattern.png");
+  background-repeat:repeat; 
+}
 
 .clear{clear: both;}
 span{padding-right: 10px;}
 
 .fill-viewport-height{
-height:100%;
+  height:100%;
 }
 
 @media only screen and (min-width : 768px) {
-    /* Make Navigation Toggle on Desktop Hover */
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
+  /* Make Navigation Toggle on Desktop Hover */
+  .dropdown:hover .dropdown-menu {
+      display: block;
+  }
 }
 
 /* pad body from header in mobile mode */
@@ -38,24 +55,11 @@ height:100%;
     margin-right: 0%;
     margin-left: 0%;}
 
-    #site-submenu {
-      visibility: hidden;
+  #site-submenu {
+    visibility: hidden;
   }
 
 }
-
-  img.float {
-  float: left;
-  vertical-align: middle;
-  width: 100px;
-  }
-
-.helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
-
 
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
@@ -105,34 +109,33 @@ height:100%;
   }
 
   #site-canvas {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      -webkit-transform: translateX(0);
-      transform: translateX(0);
-      -webkit-transition: .3s ease all;
-      transition: .3s ease all;
-      padding: 5% 0; /* Temp: Just spacing. */
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: .3s ease all;
+    transition: .3s ease all;
+    padding: 5% 0; /* Temp: Just spacing. */
   }
 
   #site-submenu {
-      
-      height: 100%;
-      position: absolute;
-      top: 0;
-      background: #FFDC00;
-      padding: 15px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: #FFDC00;
+    padding: 15px;
   }
 
   #site-canvas {
-      -webkit-transform: translateZ(0) translateX(0);
-      transform: translateZ(0) translateX(0);
-       -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
+    -webkit-transform: translateZ(0) translateX(0);
+    transform: translateZ(0) translateX(0);
+     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   .show-nav #site-canvas {
-      -webkit-transform: translateZ(0) translateX(200px);  
-      transform: translateZ(0) translateX(200px);  
+    -webkit-transform: translateZ(0) translateX(200px);  
+    transform: translateZ(0) translateX(200px);  
   }
 
 

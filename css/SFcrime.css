@@ -2,29 +2,26 @@ html, body, #map-canvas {
  height: 100%; margin: 0; padding: 0;
 }
 
-#legend>div>h3{
-	text-align: center;
-}
-
-#zoom_level {
+.basic {
   background: white;
   padding: 10px;
   margin: 10px;
 }
 
 #legend {
-  background: white;
-  padding: 10px;
-  margin: 10px;
   display: block;
 }
 
 #legend>div>img{
-	vertical-align: middle;
+  vertical-align: middle;
+}
+
+#legend>div>h3{
+  text-align: center;
 }
 
 #legend>span{
-	padding: 50px;
+  padding: 50px;
 }
 
 .district_labels{
@@ -39,21 +36,17 @@ html, body, #map-canvas {
  text-shadow: 2px 2px 2px rgba(0,0,0,1);
 }
 
-.unique_labels{
- color: black;
- background-color: white;
+.infowindow{
  font-family: "Lucida Grande", "Arial", sans-serif;
  font-size: 12px;
- font-weight: bold;
- text-align: center;
- width: 200px;     
+ font-weight: bold;     
  white-space: nowrap;
  padding: 10px;
  margin: 0 auto;
 }
 
 .district_total{
-  color: white;
+ color: white;
  background-color: transparent;
  font-family: "Lucida Grande", "Arial", sans-serif;
  font-size: 20px;

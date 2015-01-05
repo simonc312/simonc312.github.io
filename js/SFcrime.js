@@ -34,6 +34,12 @@
                            {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png'},
                            {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png'}]
       
+      //only one infowindow needed to avoid clutter
+      var infowindow = new google.maps.InfoWindow(
+          {
+            size: new google.maps.Size(50,50)
+          });
+
       var isDay = true;
       //lunar landing stype from snazzy maps 
       var nightStyles = {
@@ -72,21 +78,21 @@
 
             district_markers[i] = marker;
 
-            google.maps.event.addListener(marker, 'click', function() {
-                //marker.setIcon(getCircle(magnitude,'transparent',.1));
+            google.maps.event.addListener(marker, 'dblclick', function() {
                 marker.setVisible(false);
                 map.setCenter(marker.position);
                 map.setZoom(15);
             });
 
-            google.maps.event.addListener(marker, 'mouseover', function() {
-                marker.setIcon(getCircle(magnitude,'transparent',.1));
-                heatmap[i].setMap(map);
-            });
-
-            google.maps.event.addListener(marker, 'mouseout', function() {
+            google.maps.event.addListener(marker, 'click', function() {
+              if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
                 marker.setIcon(getCircle(magnitude,'red',.4));
+              }
+              else{
+                marker.setIcon(getCircle(magnitude,'transparent',.1));
+                heatmap[i].setMap(map);
+              }
             });
           }
         );
@@ -145,7 +151,7 @@
           if(marker_icons[i].name === description)
             return marker_icons[i].icon
         }
-        return marker_icons[0].icon
+        return marker_icons[0].icon //default
       }
 
       function addUniqueData(){
@@ -157,41 +163,38 @@
           var day  = data[DAY];
           var address   = data[ADDR];
           var description = data[DESC];
-          var labelDivs = "<div>"+description+"<div class='unique_marker'>"+date+"</div>"+"<div>"+day + " " + time + " " + isAM +"</div>"+ "</div>"
+          var content = "<div class='infowindow'>"+
+                              description+
+                              "<div>"+
+                                address+
+                              "</div>"+
+                              "<div>"+
+                                date+
+                              "</div>"+
+                              "<div>"+
+                                day + " " + time + " " + isAM +
+                              "</div>"+
+                          "</div>"
           var image = {
             url: getUniqueIcon(description),
             size: new google.maps.Size(32, 37),
             origin: new google.maps.Point(0,0),
             anchor: new google.maps.Point(16, 37)
           };
-          var marker    = new MarkerWithLabel({
+          var marker    = new google.maps.Marker({
             position: loc,
             map: map,
             title: description,
-            //animation: google.maps.Animation.DROP,
             icon: image, 
-            labelContent: labelDivs,
-            labelAnchor: new google.maps.Point(50, 20),
-            labelClass: "unique_labels", // the CSS class for the label
-            //labelStyle: {opacity: 0.0},
-            labelInBackground: false,
-            labelVisible: false,
             visible: false
           });
 
           unique_markers[i] = marker;
 
           google.maps.event.addListener(marker, 'click', function() {
-              if(marker.labelVisible){
-                marker.labelVisible = false;
-              marker.labelInBackground = false;
-            }else{
-              marker.labelVisible = true;
-              map.setCenter(marker.getPosition());
-            }
-              
+              infowindow.setContent(content);
+              infowindow.open(map,marker);
           });
-
        
         }
       );
@@ -231,7 +234,6 @@
       }
 
       function toggleHeatmap() {
-
           if(heatmap_all.getMap()){
             setHeatmapVisible(false);
             setMarkersVisible(district_markers,true);
@@ -277,8 +279,8 @@
                 toggleHeatmap(); //turn off
               else if(unique_markers[0].getVisible())
                 toggleUniqueMarkers(); //turn off
-            } else if(district_markers[0].getVisible())
-              toggleDistrictMarkers();
+            } else if(!district_markers[0].getVisible())
+              toggleDistrictMarkers(); //turn on
           }
           //conditions to turn on heat map view
           if(zoomLevel == 14){
@@ -295,6 +297,10 @@
               toggleUniqueMarkers(); //turn on
           }
 
+        //infowindow only relevant when zoom is high enough to see symbols
+        if(zoomLevel < 15){
+          infowindow.close();
+        }
           curZoomLevel = zoomLevel;
         }
     
@@ -313,7 +319,7 @@
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
         map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('zoom_level'));
         map.setOptions(dayStyles);
-
+        // setup legend 
         $.each(marker_icons, function(i,marker){
           var name = marker.name;
           var icon = marker.icon;
@@ -323,12 +329,8 @@
         });
 
         $('#zoom_level').text('Zoom Level: ' + curZoomLevel);
-        
-
         lastValidCenter = map.getCenter();
-
         google.maps.event.addListener(map, 'center_changed', centerChangedEventHandler);
-
         google.maps.event.addListener(map, 'zoom_changed', zoomChangeEventHandler);
       }
 
@@ -339,19 +341,15 @@
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
           vehicle_theft_data =  json;
         }),
-
         // Get the PdDistrict mean locations and numbers
         $.getJSON("../../assets/vehicle.theft.location.json", function(json) {
           vehicle_theft_district_data = json;
         }),
-
         $.getJSON("../../assets/vehicle.theft.date.json", function(json) {
           vehicle_theft_date_data = json;
         })
 
-
       ).then(function() {//consider adding on fail or on progress function handling
-
         // All is ready now
         addDistrictData();
         initializeHeatMapArray();
