@@ -14,6 +14,7 @@
       var vehicle_theft_data;
       var vehicle_theft_date_data;
       var vehicle_theft_district_data;
+      var sf_district_bios;
       var curZoomLevel = 12;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
@@ -92,6 +93,8 @@
               else{
                 marker.setIcon(getCircle(magnitude,'transparent',.1));
                 heatmap[i].setMap(map);
+                //infowindow.setContent(getDistrictBio(district));
+                //infowindow.open(map,marker);
               }
             });
           }
@@ -146,12 +149,30 @@
         
       };
 
+      function getDistrictBio(district){
+        for(var i=0;i<sf_district_bios.length;i++){
+          var district_obj = sf_district_bios[i];
+          if(district_obj.district === district){
+            var content = document.createElement('div');
+            content.className = "infowindow";
+            for(var index=0;index< district_object.full_name;index++){
+              var innerDiv = document.createElement('div');
+              innerDiv.innerHTML =  "<h4>"+district_obj.full_name[index]+"</h4>"+
+                                    "<div>"+district_obj.description[index]+"</div>"+
+                                    '<a href="'+district_obj.url[index]+'">Read more</a>'
+              content.appendChild(innerDiv);
+            }
+            return content;
+          }
+        }
+      }
+
       function getUniqueIcon(description){
         for(var i=0; i<marker_icons.length;i++){
           if(marker_icons[i].name === description)
             return marker_icons[i].icon
         }
-        return marker_icons[0].icon //default
+        return marker_icons[0].icon; //default
       }
 
       function addUniqueData(){
@@ -164,16 +185,9 @@
           var address   = data[ADDR];
           var description = data[DESC];
           var content = "<div class='infowindow'>"+
-                              description+
-                              "<div>"+
-                                address+
-                              "</div>"+
-                              "<div>"+
-                                date+
-                              "</div>"+
-                              "<div>"+
-                                day + " " + time + " " + isAM +
-                              "</div>"+
+                              "<h3>"+description+"</h3>"+
+                              "<div><span>address:</span> "+address+"</div>"+
+                              "<div><span>date: </span> "+date+" "+day+" "+time+" "+isAM+"</div>"+
                           "</div>"
           var image = {
             url: getUniqueIcon(description),
@@ -347,6 +361,10 @@
         }),
         $.getJSON("../../assets/vehicle.theft.date.json", function(json) {
           vehicle_theft_date_data = json;
+        }),
+        // Get text descriptions of districts and url links to read more
+        $.getJSON("../../assets/sf_district_bios.json", function(json) {
+          sf_district_bios = json;
         })
 
       ).then(function() {//consider adding on fail or on progress function handling
