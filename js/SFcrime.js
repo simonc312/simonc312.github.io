@@ -89,12 +89,14 @@
               if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
                 marker.setIcon(getCircle(magnitude,'red',.4));
-                $('#district_bio').addClass('hide');
+                var data = $('#district_bio').data('current_district');
+                if(data != undefined && data === district)
+                  $('#district_bio').addClass('hide');
               }
               else{
                 marker.setIcon(getCircle(magnitude,'transparent',.1));
                 heatmap[i].setMap(map);
-                $('#district_bio').addClass(district);
+                $('#district_bio').data('current_district',district);
                 $('#district_bio').html(getDistrictBio(district));
                 $('#district_bio').removeClass('hide');
               }
@@ -330,6 +332,7 @@
       function setUpLegend(){
         var legend = document.getElementById('legend');
         var container = document.createElement('div');
+        container.innerHTML = "<h4>Legend</h4>";
         container.className = 'infowindow';
         $.each(marker_icons, function(i,marker){
           var name = marker.name;

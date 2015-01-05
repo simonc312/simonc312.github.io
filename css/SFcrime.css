@@ -12,11 +12,11 @@ html, body, #map-canvas {
   padding: 50px;
 }
 
-#legend>div>img{
+#legend>div>div>img{
   vertical-align: middle;
 }
 
-#legend>div>h3{
+#legend>div>div>h3{
   text-align: center;
 }
 
