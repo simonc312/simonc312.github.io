@@ -38,7 +38,7 @@
       //only one infowindow needed to avoid clutter
       var infowindow = new google.maps.InfoWindow(
           {
-            maxWidth: 300
+            maxWidth: 340
           });
 
       var isDay = true;
@@ -70,7 +70,7 @@
               title: district,
               animation: google.maps.Animation.DROP,
               icon: getCircle(magnitude,'red',.4),
-              labelContent: "<div>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
+              labelContent: "<div>"+district+"<div class='district_labels district_total'>"+magnitude+"</div></div>",
               labelAnchor: new google.maps.Point(50, 10),
               labelClass: "district_labels", // the CSS class for the label
               labelStyle: {opacity: 0.9},
@@ -158,12 +158,12 @@
           var district_obj = sf_district_bios[i];
           if(district_obj.district === district){
             var content = document.createElement('div');
-            content.className = "infowindow min-width";
+            content.className = "bio-window min-width";
             content.innerHTML = "<h3>"+district+" District Bio<h3>";
             for(var index=0;index< district_obj.full_name.length;index++){
               var innerDiv = document.createElement('div');
               innerDiv.className = "border-row";
-              innerDiv.innerHTML =  "<h4>"+district_obj.full_name[index]+"</h4>"+
+              innerDiv.innerHTML =  "<h4 class='spacing'>"+district_obj.full_name[index]+"</h4>"+
                                     "<div><p>"+district_obj.description[index]+"</p></div>"+
                                     '<a href="'+district_obj.url[index]+'" target="_blank">Read more</a>'
                                     
@@ -333,7 +333,7 @@
         var legend = document.getElementById('legend');
         var container = document.createElement('div');
         container.innerHTML = "<h4>Legend</h4>";
-        container.className = 'infowindow';
+        container.className = 'bio-window';
         $.each(marker_icons, function(i,marker){
           var name = marker.name;
           var icon = marker.icon;
@@ -354,8 +354,6 @@
           streetViewControl: false,
           mapTypeId: google.maps.MapTypeId.ROAD
         };
-        
-        setUpLegend();
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.controls[google.maps.ControlPosition.RIGHT_TOP].push(document.getElementById('panel'));
@@ -367,9 +365,7 @@
         google.maps.event.addListener(map, 'center_changed', centerChangedEventHandler);
         google.maps.event.addListener(map, 'zoom_changed', zoomChangeEventHandler);
       }
-
-      google.maps.event.addDomListener(window, 'load', initialize);
-
+      //google.maps.event.addDomListener(window, 'load', initialize);
       $.when(
         // Get all the data points for vehicle thefts
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
@@ -389,8 +385,10 @@
 
       ).then(function() {//consider adding on fail or on progress function handling
         // All is ready now
+        initialize();
         addDistrictData();
         initializeHeatMapArray();
         addHeatMapData();
         addUniqueData();
+        setUpLegend();
       });

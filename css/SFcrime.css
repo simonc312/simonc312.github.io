@@ -19,9 +19,8 @@ html, body, #map-canvas {
  height: 100%; margin: 0; padding: 0;
 }
 
-p{
-	font-family: "Open Sans", "Lucida Grande", sans-serif;
-	font-size:;
+p {
+	font-family: "Open Sans", "Arial", sans-serif;
 	line-height: 1.5;
 }
 
@@ -33,27 +32,12 @@ p{
 }
 
 .centered{
+	font-size: 14px;
 	text-align:center;
 }
 
-#panel{
- 	padding-bottom:10px;
-}
-
-#panel>span{
- 	padding: 50px;
-}
-
-#legend>div>div>img{
-  vertical-align: middle;
-}
-
-#legend>div>div>h3{
-  text-align: center;
-}
-
-#district_bio{
-	padding-top:10px;
+.spacing{
+	letter-spacing: 2px;
 }
 
 .slide {
@@ -69,50 +53,71 @@ p{
 	max-height: 0;
 }
 
-.district_labels{
- color: white;
- background-color: transparent;
- font-family: "Oswald", "Arial", sans-serif;
- font-size: 14px;
- font-style: bold;
- text-align: center;
- width: 100px;     
- white-space: nowrap;
- text-shadow: 2px 2px 2px rgba(0,0,0,1);
-}
-
-.infowindow{    
-	padding: 10px;
-	margin: 0 auto;
-	max-height:250px;
-	max-width: 250px;
-	overflow: auto;
-	overflow-x: hidden;
-	overflow-y: auto;
-}
-
-.infowindow>div>span{
-	font-style: bold;
-}
-
 .min-width{
 	min-width:200px;
 }
 
 .border-row {
-	padding-top: 5px;
+	padding-top: 10px;
 	padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
 }
 
-.district_total{
+#panel{
+ 	padding-bottom:10px;
+}
+
+#panel>span{
+ 	display:table;
+	margin:0 auto;
+}
+
+#legend>div>div>img{
+  vertical-align: middle;
+}
+
+#legend>div>div>h3{
+  text-align: center;
+}
+
+#district_bio{
+	padding-top:10px;
+}
+
+.district_labels{
  color: white;
  background-color: transparent;
  font-family: "Oswald", "Arial", sans-serif;
- font-size: 20px;
  font-style: bold;
+ font-size: 14px;
  text-align: center;
  width: 100px;     
  white-space: nowrap;
  text-shadow: 2px 2px 2px rgba(0,0,0,1);
+}
+
+.district_labels>.district_total{
+ font-size: 20px;
+}
+
+.infowindow{
+	font-family: 'Open Sans','Arial', sans-serif;
+	overflow: hidden;
+    white-space: nowrap;
+}
+
+.bio-window{
+	font-family: 'Open Sans','Arial', sans-serif;    
+	padding: 10px;
+	margin: 0 auto;
+	max-height:240px;
+	max-width: 300px;
+	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.infowindow>div>span, .bio-window>div>span{
+	font-family: 'Oswald';
+	font-style: bold;
 }
