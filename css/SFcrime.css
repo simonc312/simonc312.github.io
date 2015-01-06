@@ -1,15 +1,47 @@
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+@import url('http://fonts.googleapis.com/css?family=Oswald');
+
+@font-face {
+   font-family: 'Open Sans';  
+   src: url("http://fonts.googleapis.com/css?family=Open+Sans:bold");
+   font-style: bold;  /* Associates values of "bold" with this resource. */
+   font-weight: normal;  
+}
+
+@font-face {
+   font-family: 'Oswald';  
+   src: url("http://fonts.googleapis.com/css?family=Oswald:bold");
+   font-style: bold;  /* Associates values of "bold" with this resource. */
+   font-weight: normal;  
+}
+
 html, body, #map-canvas {
  height: 100%; margin: 0; padding: 0;
 }
 
+p{
+	font-family: "Open Sans", "Lucida Grande", sans-serif;
+	font-size:;
+	line-height: 1.5;
+}
+
 .basic {
+  font-family: "Oswald", "Arial", sans-serif;
   background: white;
   padding: 10px;
   margin: 10px;
 }
 
+.centered{
+	text-align:center;
+}
+
+#panel{
+ 	padding-bottom:10px;
+}
+
 #panel>span{
-  padding: 50px;
+ 	padding: 50px;
 }
 
 #legend>div>div>img{
@@ -18,6 +50,10 @@ html, body, #map-canvas {
 
 #legend>div>div>h3{
   text-align: center;
+}
+
+#district_bio{
+	padding-top:10px;
 }
 
 .slide {
@@ -36,17 +72,16 @@ html, body, #map-canvas {
 .district_labels{
  color: white;
  background-color: transparent;
- font-family: "Lucida Grande", "Arial", sans-serif;
+ font-family: "Oswald", "Arial", sans-serif;
  font-size: 14px;
- font-weight: bold;
+ font-style: bold;
  text-align: center;
  width: 100px;     
  white-space: nowrap;
  text-shadow: 2px 2px 2px rgba(0,0,0,1);
 }
 
-.infowindow{
-	font-family: "Lucida Grande", "Arial", sans-serif;    
+.infowindow{    
 	padding: 10px;
 	margin: 0 auto;
 	max-height:250px;
@@ -57,7 +92,7 @@ html, body, #map-canvas {
 }
 
 .infowindow>div>span{
-	font-weight: bold;
+	font-style: bold;
 }
 
 .min-width{
@@ -73,9 +108,9 @@ html, body, #map-canvas {
 .district_total{
  color: white;
  background-color: transparent;
- font-family: "Lucida Grande", "Arial", sans-serif;
+ font-family: "Oswald", "Arial", sans-serif;
  font-size: 20px;
- font-weight: bold;
+ font-style: bold;
  text-align: center;
  width: 100px;     
  white-space: nowrap;
