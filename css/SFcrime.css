@@ -63,6 +63,28 @@ p {
     border-top: 1px solid #ccc;
 }
 
+.sprite-up-arrow{ background-position: 0px 40px; width: 33px; height: 33px; } 
+.sprite-down-arrow{ background-position: 0 0; width: 33px; height: 33px;} 
+
+.arrow{
+	background-image: url('../../assets/arrow-sprite.png');
+	float: right;
+	box-shadow: 0 0 0 4px #fff;
+	-webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+	-webkit-transform: scale(1);
+	-moz-transition: -moz-transform 0.2s, opacity 0.2s;
+	-moz-transform: scale(0.6);
+	-ms-transform: scale(0.6);
+	transition: transform 0.2s, opacity 0.2s;
+	transform: scale(0.6);
+}
+.arrow:hover{
+	-webkit-transform: scale(0.8);
+	-moz-transform: scale(0.8);
+	-ms-transform: scale(0.8);
+	transform: scale(0.8);
+}
+
 #panel{
  	padding-bottom:10px;
 }
@@ -89,14 +111,17 @@ p {
  background-color: transparent;
  font-family: "Oswald", "Arial", sans-serif;
  font-style: bold;
- font-size: 14px;
  text-align: center;
  width: 100px;     
  white-space: nowrap;
  text-shadow: 2px 2px 2px rgba(0,0,0,1);
 }
 
-.district_labels>.district_total{
+.district_font_size{
+ font-size: 14px;
+}
+
+.district_total{
  font-size: 20px;
 }
 

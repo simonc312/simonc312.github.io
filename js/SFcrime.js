@@ -70,7 +70,7 @@
               title: district,
               animation: google.maps.Animation.DROP,
               icon: getCircle(magnitude,'red',.4),
-              labelContent: "<div>"+district+"<div class='district_labels district_total'>"+magnitude+"</div></div>",
+              labelContent: "<div class='district_font_size'>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
               labelAnchor: new google.maps.Point(50, 10),
               labelClass: "district_labels", // the CSS class for the label
               labelStyle: {opacity: 0.9},
@@ -332,8 +332,9 @@
       function setUpLegend(){
         var legend = document.getElementById('legend');
         var container = document.createElement('div');
-        container.innerHTML = "<h4>Legend</h4>";
-        container.className = 'bio-window';
+        container.innerHTML = "<div><h3>Legend</h3><div>";
+        container.className = 'bio-window slide';
+        container.id = 'inner_legend';
         $.each(marker_icons, function(i,marker){
           var name = marker.name;
           var icon = marker.icon;
@@ -342,6 +343,14 @@
           container.appendChild(div);
         });
         legend.appendChild(container);
+        legend.innerHTML += "<a id='legend_arrow' class='arrow sprite-up-arrow' href='#'></a>";
+        $('#legend_arrow').click(function(){
+          var self = $(this);
+          $('#inner_legend').slideToggle('linear',function(){
+             self.toggleClass("sprite-up-arrow sprite-down-arrow");
+          });
+         
+        });
       }
     
       function initialize() {
