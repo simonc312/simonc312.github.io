@@ -10,6 +10,7 @@
       var sf_district_bios;
       var lastValidCenter;
       var curZoomLevel = 13;
+      var current_marker;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //array of heat map pts grouped by district ex 'TARAVAL'
       var district_markers = [];
@@ -224,20 +225,25 @@
           google.maps.event.addListener(marker,'mouseover',activateIcon);
 
           google.maps.event.addListener(marker,'mouseout',function(){
-            if(infowindow.isOpen() == false)
+            if(current_marker != marker)
               normalizeIcon();
           });
 
           google.maps.event.addListener(marker, 'click', function() {
+            var is_next_marker = current_marker != marker;
+            alert(is_next_marker);
             if(infowindow.isOpen()){
-              infowindow.close();
-              normalizeIcon();
-              google.maps.event.removeListener(infowindow,'closeclick');
+              google.maps.event.trigger(infowindow,'closeclick'); //we always want to close infowindow on second click and reset
+              //marker is passed as new_marker to call back of closeclick 
             }
-            else{
+            if(is_next_marker){
+              current_marker = marker;
               infowindow.setContent(content);
               infowindow.open(map,marker);
-              google.maps.event.addListener(infowindow,'closeclick',normalizeIcon)
+              google.maps.event.addListenerOnce(infowindow,'closeclick',function(){
+                normalizeIcon();
+                current_marker = undefined;
+            });
             }
           });
        
