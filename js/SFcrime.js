@@ -23,7 +23,7 @@
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
           new google.maps.LatLng(37.80174049420249, -122.3091720214844)
       );
-      var marker_icons = [ {'name': 'STOLEN AUTOMOBILE', 'icon': '../../assets/sf_crime_icons/car.png'},
+      var marker_icons = [ {'name': 'STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car.png'},
                            {'name': 'ATTEMPTED STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car-attempted.png'},
                            {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png'},
                            {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png'},
