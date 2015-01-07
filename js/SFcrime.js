@@ -1,20 +1,14 @@
       //constants for indices of vehicle_theft_data element fields 
-      var LONGITUDE = 0;
-      var LATITUDE  = 1;
-      var DISTRICT  = 2;
-
+      var DATA = {'LONGITUDE':0,'LATITUDE':1,'DISTRICT':2};
       //constants for indices of vehicle theft date data element fields
-      var DAY  = 0;
-      var DATE = 1;
-      var TIME = 2;
-      var DESC = 3;
-      var ADDR = 4;
-      var ISAM = 5;
-      
+      var DATE_DATA = {'DAY':0,'DATE':1,'TIME':2,'DESC':3,'ADDR':4,'ISAM':5};
+      var DISTRICT_CIRCLE = {'COLOR': {'ON':'red','OFF':'transparent'},'OPACITY': {'ON':0.4,'OFF':0}};
+      var LEVEL = {'DISTRICT':13,'HEAT_MAP':14,'UNIQUE_MARKER':15}
       var vehicle_theft_data;
       var vehicle_theft_date_data;
       var vehicle_theft_district_data;
       var sf_district_bios;
+      var lastValidCenter;
       var curZoomLevel = 12;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
@@ -23,7 +17,7 @@
       var gradients = [];
       var heatmap_all;
       var heatmapData_all = []; //used for toggling heatmap display mode from district view or individual markers
-      var lastValidCenter;
+      
     // bounds of the desired area
       var allowedBounds = new google.maps.LatLngBounds(
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
@@ -69,10 +63,10 @@
               map: map,
               title: district,
               animation: google.maps.Animation.DROP,
-              icon: getCircle(magnitude,'red',.4),
+              icon: getCircle(magnitude,DISTRICT_CIRCLE.COLOR.ON,DISTRICT_CIRCLE.OPACITY.ON),
               labelContent: "<div class='district_font_size'>"+district+"<div class='district_total'>"+magnitude+"</div></div>",
               labelAnchor: new google.maps.Point(50, 10),
-              labelClass: "district_labels", // the CSS class for the label
+              labelClass: "district_labels", 
               labelStyle: {opacity: 0.9},
               labelInBackground: false
             });
@@ -82,19 +76,19 @@
             google.maps.event.addListener(marker, 'dblclick', function() {
                 marker.setVisible(false);
                 map.setCenter(marker.position);
-                map.setZoom(15);
+                map.setZoom(LEVEL.UNIQUE_MARKER);
             });
 
             google.maps.event.addListener(marker, 'click', function() {
               if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
-                marker.setIcon(getCircle(magnitude,'red',.4));
+                marker.setIcon(getCircle(magnitude,DISTRICT_CIRCLE.COLOR.ON,DISTRICT_CIRCLE.OPACITY.ON));
                 var data = $('#district_bio').data('current_district');
                 if(data != undefined && data === district)
                   $('#district_bio').addClass('hide');
               }
               else{
-                marker.setIcon(getCircle(magnitude,'transparent',.1));
+                marker.setIcon(getCircle(magnitude,DISTRICT_CIRCLE.COLOR.OFF,DISTRICT_CIRCLE.OPACITY.OFF));
                 heatmap[i].setMap(map);
                 $('#district_bio').data('current_district',district);
                 $('#district_bio').html(getDistrictBio(district));
@@ -130,10 +124,10 @@
 
       function addHeatMapData(){
         $.each( vehicle_theft_data, function(i,data) {
-            var lat = data[LATITUDE];
-            var lng = data[LONGITUDE];
+            var lat = data[DATA.LATITUDE];
+            var lng = data[DATA.LONGITUDE];
             var location = new google.maps.LatLng(lat, lng);
-            var district = data[DISTRICT]; 
+            var district = data[DATA.DISTRICT]; 
             heatmapData[district].push(location);
             heatmapData_all.push(location);
         });
@@ -185,12 +179,12 @@
       function addUniqueData(){
         $.each( vehicle_theft_date_data, function( i, data){
           var loc  = heatmapData_all[i];
-          var time = data[TIME];
-          var isAM = data[ISAM];
-          var date = data[DATE];
-          var day  = data[DAY];
-          var address   = data[ADDR];
-          var description = data[DESC];
+          var time = data[DATE_DATA.TIME];
+          var isAM = data[DATE_DATA.ISAM];
+          var date = data[DATE_DATA.DATE];
+          var day  = data[DATE_DATA.DAY];
+          var address   = data[DATE_DATA.ADDR];
+          var description = data[DATE_DATA.DESC];
           var content = "<div class='infowindow'>"+
                               "<h3>"+description+"</h3>"+
                               "<div><span>address:</span> "+address+"</div>"+
@@ -291,41 +285,43 @@
 
       function zoomChangeEventHandler() {
           var zoomLevel = map.getZoom();
+          var legend = $('#legend');
           $('#zoom_level').text('Zoom Level: ' + zoomLevel);
 
           //conditions to turn on district view
-          if(zoomLevel <= 13){
+          if(zoomLevel <= LEVEL.DISTRICT){
             if(zoomLevel < curZoomLevel){
               if(heatmap_all.getMap())
                 toggleHeatmap(); //turn off
               else if(unique_markers[0].getVisible())
                 toggleUniqueMarkers(); //turn off
-            } else if(!district_markers[0].getVisible())
+            } 
+            else if(!district_markers[0].getVisible())
               toggleDistrictMarkers(); //turn on
           }
           //conditions to turn on heat map view
-          if(zoomLevel == 14){
-            if(zoomLevel < curZoomLevel) //curZoomLevel is 15
+          if(zoomLevel == LEVEL.HEAT_MAP){
+            if(zoomLevel < curZoomLevel)
               toggleUniqueMarkers(); //turn off
             if(heatmap_all.getMap() == null) //if off turn on
               toggleHeatmap();
           }
           //conditions to turn on unique markers view
-          if(zoomLevel >= 15){
-            $('#legend').removeClass('hide');
+          if(zoomLevel >= LEVEL.UNIQUE_MARKER){
+            legend.removeClass('hide');
             if(heatmap_all.getMap()) //turn off heat map view
               setHeatmapVisible(false);
             if(unique_markers[0].getVisible() == false)
               toggleUniqueMarkers(); //turn on
           }else{
-            if(!$('#legend').hasClass('hide'))
-              $('#legend').addClass('hide');
+            if(legend.hasClass('hide') == false)
+              legend.addClass('hide');
           }
 
         //infowindow only relevant when zoom is high enough to see symbols
-        if(zoomLevel < 15){
-          infowindow.close();
-        }
+          if(zoomLevel < LEVEL.UNIQUE_MARKER){
+            infowindow.close();
+          }
           curZoomLevel = zoomLevel;
         }
 
@@ -338,23 +334,21 @@
         $.each(marker_icons, function(i,marker){
           var name = marker.name;
           var icon = marker.icon;
-          var div = document.createElement('div');
-          div.innerHTML = '<img src="' + icon + '"> ' + name;
-          container.appendChild(div);
+          var symbolDiv = document.createElement('div');
+          symbolDiv.innerHTML = '<img src="' + icon + '"> ' + name;
+          container.appendChild(symbolDiv);
         });
         legend.appendChild(container);
-        legend.innerHTML += "<a id='legend_arrow' class='arrow sprite-up-arrow' href='#'></a>";
+        legend.innerHTML += "<a id='legend_arrow' class='arrow sprite-up-arrow' href='javascript:void(0)'></a>";
         $('#legend_arrow').click(function(){
           var self = $(this);
-          $('#inner_legend').slideToggle('linear',function(){
-             self.toggleClass("sprite-up-arrow sprite-down-arrow");
-          });
+          var updateArrow = function(){self.toggleClass("sprite-up-arrow sprite-down-arrow");};
+          $('#inner_legend').slideToggle('linear',updateArrow);
          
         });
       }
     
       function initialize() {
-
         var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
         var mapOptions = {
           center: sanFrancisco,
