@@ -9,7 +9,7 @@
       var vehicle_theft_district_data;
       var sf_district_bios;
       var lastValidCenter;
-      var curZoomLevel = 12;
+      var curZoomLevel = 13;
       var heatmap = {}; //dictionary of heatmaps per district
       var heatmapData = []; //2 dimensional array heat map pts by district
       var district_markers = [];
@@ -23,11 +23,11 @@
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
           new google.maps.LatLng(37.80174049420249, -122.3091720214844)
       );
-      var marker_icons = [ {'name': 'STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car.png'},
-                           {'name': 'ATTEMPTED STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car-attempted.png'},
-                           {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png'},
-                           {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png'},
-                           {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png'}]
+      var marker_icons = [ {'name': 'STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': 'ATTEMPTED STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car-attempted.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png', 'inactive_icon':'../../assets/sf_crime_icons/motorcycle-inactive.png'},
+                           {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png','inactive_icon':'../../assets/sf_crime_icons/truck-inactive.png'}]
       
       //only one infowindow needed to avoid clutter
       var infowindow = new google.maps.InfoWindow(
@@ -360,8 +360,13 @@
         $.each(marker_icons, function(i,marker){
           var name = marker.name;
           var icon = marker.icon;
+          var inactive_icon = marker.inactive_icon;
           var symbolDiv = document.createElement('div');
-          symbolDiv.innerHTML = '<img src="' + icon + '"> ' + name;
+          var image = document.createElement('img');
+          image.setAttribute('src',icon);
+          image.setAttribute('id','legend-icon'+i);
+          symbolDiv.appendChild(image);
+          symbolDiv.innerHTML += name;
           container.appendChild(symbolDiv);
         });
         legend.appendChild(container);
@@ -370,12 +375,27 @@
           var self = $(this);
           var updateArrow = function(){self.toggleClass("sprite-up-arrow sprite-down-arrow");};
           $('#inner_legend').slideToggle('linear',updateArrow);
-         
+        });
+
+        $.each(marker_icons,function(i,marker){
+          var icon = marker.icon;
+          var inactive_icon = marker.inactive_icon;
+          $('#legend-icon'+i).click(function(){
+            var self = $(this);
+            if(self.hasClass('inactive')){
+              self.attr('src',icon);
+              self.removeClass('inactive');
+            }
+            else{  
+              self.attr('src',inactive_icon);
+              self.addClass('inactive');
+            }
+          });
         });
       }
     
       function initialize() {
-        var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
+        var sanFrancisco = new google.maps.LatLng(37.77888781891173, -122.42888814282226);
         var mapOptions = {
           center: sanFrancisco,
           zoom: curZoomLevel,
