@@ -231,10 +231,8 @@
 
           google.maps.event.addListener(marker, 'click', function() {
             var is_next_marker = current_marker != marker;
-            alert(is_next_marker);
             if(infowindow.isOpen()){
               google.maps.event.trigger(infowindow,'closeclick'); //we always want to close infowindow on second click and reset
-              //marker is passed as new_marker to call back of closeclick 
             }
             if(is_next_marker){
               current_marker = marker;
@@ -243,6 +241,7 @@
               google.maps.event.addListenerOnce(infowindow,'closeclick',function(){
                 normalizeIcon();
                 current_marker = undefined;
+                infowindow.close();
             });
             }
           });
