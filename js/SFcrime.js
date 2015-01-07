@@ -35,20 +35,15 @@
             maxWidth: 340
           });
 
+      google.maps.InfoWindow.prototype.isOpen = function(){
+        var map = infowindow.getMap();
+        return (map !== null && typeof map !== "undefined");
+      }
+
       var isDay = true;
       //lunar landing stype from snazzy maps 
       var nightStyles = {
         styles: [{"stylers":[{"hue":"#ff1a00"},{"invert_lightness":true},{"saturation":-100},{"lightness":33},{"gamma":0.5}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#2D333C"}]}]
-      };
-
-      var highLevelStyles = {
-        styles: [{
-            'featureType': 'all',
-                'elementType': 'labels',
-                'stylers': [{
-                'visibility': 'on'
-            }]
-        }]
       };
       //pale dawn style from snazzy maps
       var dayStyles = {styles: [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]},{"featureType":"landscape","stylers":[{"color":"#f2e5d4"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}]
@@ -126,8 +121,8 @@
         $.each( vehicle_theft_data, function(i,data) {
             var lat = data[DATA.LATITUDE];
             var lng = data[DATA.LONGITUDE];
-            var location = new google.maps.LatLng(lat, lng);
-            var district = data[DATA.DISTRICT]; 
+            var district = data[DATA.DISTRICT];
+            var location = new google.maps.LatLng(lat, lng); 
             heatmapData[district].push(location);
             heatmapData_all.push(location);
         });
@@ -173,10 +168,22 @@
           if(marker_icons[i].name === description)
             return marker_icons[i].icon
         }
-        return marker_icons[0].icon; //default
+        return marker_icons[0].icon; //default stolen automobile icon
       }
 
       function addUniqueData(){
+        var normal_size = new google.maps.Size(28, 33);
+        var scaled_size = new google.maps.Size(32,37);
+        var normal_anchor = new google.maps.Point(16, 33);
+        var scaled_anchor = new google.maps.Point(16, 37);
+
+        var updateIcon = function(marker,icon,size,anchor){
+          icon.scaledSize = size;
+          icon.size = size;
+          icon.anchor = anchor;
+          marker.setIcon(icon);
+        } 
+
         $.each( vehicle_theft_date_data, function( i, data){
           var loc  = heatmapData_all[i];
           var time = data[DATE_DATA.TIME];
@@ -186,35 +193,51 @@
           var address   = data[DATE_DATA.ADDR];
           var description = data[DATE_DATA.DESC];
           var content = "<div class='infowindow'>"+
-                              "<h3>"+description+"</h3>"+
-                              "<div><span>address:</span> "+address+"</div>"+
-                              "<div><span>date: </span> "+date+" "+day+" "+time+" "+isAM+"</div>"+
-                          "</div>"
-          var image = {
+                            "<h3>"+description+"</h3>"+
+                            "<div><span>address:</span> "+address+"</div>"+
+                            "<div><span>date: </span> "+date+" "+day+" "+time+" "+isAM+"</div>"+
+                        "</div>"
+          var icon = {
             url: getUniqueIcon(description),
-            size: new google.maps.Size(32, 37),
+            size: normal_size,
+            scaledSize : normal_size,
             origin: new google.maps.Point(0,0),
-            anchor: new google.maps.Point(16, 37)
+            anchor: normal_anchor
           };
-          var marker    = new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: loc,
             map: map,
             title: description,
-            icon: image, 
+            icon: icon, 
             visible: false
           });
 
           unique_markers[i] = marker;
 
+          google.maps.event.addListener(marker,'mouseover',function(){
+            updateIcon(marker,icon,scaled_size,scaled_anchor);
+          });
+
+          google.maps.event.addListener(marker,'mouseout',function(){
+            if(infowindow.isOpen() == false)
+              updateIcon(marker,icon,normal_size,normal_anchor);
+          });
+
           google.maps.event.addListener(marker, 'click', function() {
+            if(infowindow.isOpen()){
+              infowindow.close();
+              updateIcon(marker,icon,normal_size,normal_anchor);
+            }
+            else{
+              updateIcon(marker,icon,scaled_size,scaled_anchor);
               infowindow.setContent(content);
               infowindow.open(map,marker);
+            }
           });
        
         }
       );
      };
-
 
      function getCircle(magnitude,fColor,fOpacity) {
         return {
@@ -229,8 +252,8 @@
 
       function setMarkersVisible(markers,state){
          $.each(markers,function(i,marker){
-              marker.setVisible(state);
-            });
+            marker.setVisible(state);
+          });
       }
 
       function setHeatmapVisible(state){
@@ -274,13 +297,13 @@
       }
      
       function centerChangedEventHandler() {
-            if (allowedBounds.contains(map.getCenter())) {
-              // still within valid bounds, so save the last valid position
-              lastValidCenter = map.getCenter();
-            } else{
-              // not valid anymore => return to last valid position
-              map.panTo(lastValidCenter);
-            }
+        if (allowedBounds.contains(map.getCenter())) {
+          // still within valid bounds, so save the last valid position
+          lastValidCenter = map.getCenter();
+        } else{
+          // not valid anymore => return to last valid position
+          map.panTo(lastValidCenter);
+        }
         }
 
       function zoomChangeEventHandler() {
