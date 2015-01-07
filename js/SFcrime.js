@@ -11,9 +11,9 @@
       var lastValidCenter;
       var curZoomLevel = 13;
       var heatmap = {}; //dictionary of heatmaps per district
-      var heatmapData = []; //2 dimensional array heat map pts by district
+      var heatmapData = []; //array of heat map pts grouped by district ex 'TARAVAL'
       var district_markers = [];
-      var unique_markers = [];
+      var unique_markers = []; //array of marker objects grouped by description ex 'STOLEN VEHICLE'
       var gradients = [];
       var heatmap_all;
       var heatmapData_all = []; //used for toggling heatmap display mode from district view or individual markers
@@ -23,11 +23,11 @@
           new google.maps.LatLng(37.590059187414685, -122.63448208007815),
           new google.maps.LatLng(37.80174049420249, -122.3091720214844)
       );
-      var marker_icons = [ {'name': 'STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
-                           {'name': 'ATTEMPTED STOLEN VEHICLE', 'icon': '../../assets/sf_crime_icons/car-attempted.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
-                           {'name': 'STOLEN AND RECOVERED VEHICLE', 'icon':  '../../assets/sf_crime_icons/car-recovered.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
-                           {'name': 'STOLEN MOTORCYCLE', 'icon': '../../assets/sf_crime_icons/motorcycle2.png', 'inactive_icon':'../../assets/sf_crime_icons/motorcycle-inactive.png'},
-                           {'name': 'STOLEN TRUCK', 'icon': '../../assets/sf_crime_icons/truck2.png','inactive_icon':'../../assets/sf_crime_icons/truck-inactive.png'}]
+      var marker_icons = [ {'name': "STOLEN VEHICLE", 'icon': '../../assets/sf_crime_icons/car.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': "ATTEMPTED STOLEN VEHICLE", 'icon': '../../assets/sf_crime_icons/car-attempted.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': "STOLEN AND RECOVERED VEHICLE", 'icon':  '../../assets/sf_crime_icons/car-recovered.png', 'inactive_icon':'../../assets/sf_crime_icons/car-inactive.png'},
+                           {'name': "STOLEN MOTORCYCLE", 'icon': '../../assets/sf_crime_icons/motorcycle2.png', 'inactive_icon':'../../assets/sf_crime_icons/motorcycle-inactive.png'},
+                           {'name': "STOLEN TRUCK", 'icon': '../../assets/sf_crime_icons/truck2.png','inactive_icon':'../../assets/sf_crime_icons/truck-inactive.png'}]
       
       //only one infowindow needed to avoid clutter
       var infowindow = new google.maps.InfoWindow(
@@ -168,7 +168,7 @@
       function getUniqueIcon(description){
         for(var i=0; i<marker_icons.length;i++){
           if(marker_icons[i].name === description)
-            return marker_icons[i].icon
+            return marker_icons[i].icon;
         }
         return marker_icons[0].icon; //default stolen automobile icon
       }
@@ -199,6 +199,10 @@
                             "<div><span>address:</span> "+address+"</div>"+
                             "<div><span>date: </span> "+date+" "+day+" "+time+" "+isAM+"</div>"+
                         "</div>"
+          
+          var marker_array = unique_markers[description]
+          if(marker_array == undefined)
+            return false; //skip this datapoint because it has an abnormal description not handled by legend
           var icon = {
             url: getUniqueIcon(description),
             size: normal_size,
@@ -213,9 +217,8 @@
             icon: icon, 
             visible: false
           });
-
-          unique_markers[i] = marker;
-
+          
+          marker_array.push(marker);
           var activateIcon = function(){updateIcon(marker,icon,scaled_size,scaled_anchor);}
           var normalizeIcon = function(){updateIcon(marker,icon,normal_size,normal_anchor);}
           google.maps.event.addListener(marker,'mouseover',activateIcon);
@@ -291,8 +294,17 @@
           setMarkersVisible(markers,true);
       }
 
-      function toggleUniqueMarkers(){
-        toggleMarkers(unique_markers);
+      function toggleUniqueMarkers(turnOn){
+        if(turnOn){
+          $('.active-icon').each(function(){
+            setMarkersVisible(unique_markers[this.name],true);
+          });
+        }
+        else{
+           $('.active-icon').each(function(){
+            setMarkersVisible(unique_markers[this.name],false);
+          });
+        }
       }
 
       function toggleDistrictMarkers(){
@@ -319,8 +331,7 @@
             if(zoomLevel < curZoomLevel){
               if(heatmap_all.getMap())
                 toggleHeatmap(); //turn off
-              else if(unique_markers[0].getVisible())
-                toggleUniqueMarkers(); //turn off
+                toggleUniqueMarkers(false); //turn off
             } 
             else if(!district_markers[0].getVisible())
               toggleDistrictMarkers(); //turn on
@@ -328,7 +339,7 @@
           //conditions to turn on heat map view
           if(zoomLevel == LEVEL.HEAT_MAP){
             if(zoomLevel < curZoomLevel)
-              toggleUniqueMarkers(); //turn off
+              toggleUniqueMarkers(false); //turn off
             if(heatmap_all.getMap() == null) //if off turn on
               toggleHeatmap();
           }
@@ -337,8 +348,8 @@
             legend.removeClass('hide');
             if(heatmap_all.getMap()) //turn off heat map view
               setHeatmapVisible(false);
-            if(unique_markers[0].getVisible() == false)
-              toggleUniqueMarkers(); //turn on
+            toggleUniqueMarkers(true);
+            //turn on based on active legend symbols
           }else{
             if(legend.hasClass('hide') == false)
               legend.addClass('hide');
@@ -354,7 +365,7 @@
       function setUpLegend(){
         var legend = document.getElementById('legend');
         var container = document.createElement('div');
-        container.innerHTML = "<div><h3>Legend</h3><div>";
+        container.innerHTML = "<div><h3>Interactive Legend</h3><div>";
         container.className = 'bio-window slide';
         container.id = 'inner_legend';
         $.each(marker_icons, function(i,marker){
@@ -363,8 +374,12 @@
           var inactive_icon = marker.inactive_icon;
           var symbolDiv = document.createElement('div');
           var image = document.createElement('img');
+
+          unique_markers[name] = []; //setup uniquemarkers array of arrays
           image.setAttribute('src',icon);
           image.setAttribute('id','legend-icon'+i);
+          image.className = 'active-icon'; //all icons start active
+          image.name = name; //stored name in image to reference later when toggling unique marker visibility
           symbolDiv.appendChild(image);
           symbolDiv.innerHTML += name;
           container.appendChild(symbolDiv);
@@ -382,13 +397,15 @@
           var inactive_icon = marker.inactive_icon;
           $('#legend-icon'+i).click(function(){
             var self = $(this);
-            if(self.hasClass('inactive')){
+            if(self.hasClass('inactive-icon')){
               self.attr('src',icon);
-              self.removeClass('inactive');
+              self.toggleClass("active-icon inactive-icon");
+              setMarkersVisible(unique_markers[marker.name],true);
             }
             else{  
               self.attr('src',inactive_icon);
-              self.addClass('inactive');
+              self.toggleClass("active-icon inactive-icon");
+              setMarkersVisible(unique_markers[marker.name],false);
             }
           });
         });
@@ -438,6 +455,6 @@
         addDistrictData();
         initializeHeatMapArray();
         addHeatMapData();
-        addUniqueData();
         setUpLegend();
+        addUniqueData();
       });

@@ -98,6 +98,10 @@ p {
   vertical-align: middle;
 }
 
+#legend>div>div>img:hover{
+  cursor:pointer;
+}
+
 #legend>div>div>h3{
   text-align: center;
 }
