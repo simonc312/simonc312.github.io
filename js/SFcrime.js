@@ -40,6 +40,7 @@
         return (map !== null && typeof map !== "undefined");
       }
 
+      //determine which style is active
       var isDay = true;
       //lunar landing stype from snazzy maps 
       var nightStyles = {
@@ -75,19 +76,20 @@
             });
 
             google.maps.event.addListener(marker, 'click', function() {
+              var district_bio = $('#district_bio');
               if(heatmap[i].getMap() != null){
                 heatmap[i].setMap(null);
                 marker.setIcon(getCircle(magnitude,DISTRICT_CIRCLE.COLOR.ON,DISTRICT_CIRCLE.OPACITY.ON));
-                var data = $('#district_bio').data('current_district');
+                var data = district_bio.data('current_district');
                 if(data != undefined && data === district)
-                  $('#district_bio').addClass('hide');
+                  district_bio.addClass('hide');
               }
               else{
                 marker.setIcon(getCircle(magnitude,DISTRICT_CIRCLE.COLOR.OFF,DISTRICT_CIRCLE.OPACITY.OFF));
                 heatmap[i].setMap(map);
-                $('#district_bio').data('current_district',district);
-                $('#district_bio').html(getDistrictBio(district));
-                $('#district_bio').removeClass('hide');
+                district_bio.data('current_district',district);
+                district_bio.html(getDistrictBio(district));
+                district_bio.removeClass('hide');
               }
             });
           }
@@ -214,24 +216,25 @@
 
           unique_markers[i] = marker;
 
-          google.maps.event.addListener(marker,'mouseover',function(){
-            updateIcon(marker,icon,scaled_size,scaled_anchor);
-          });
+          var activateIcon = function(){updateIcon(marker,icon,scaled_size,scaled_anchor);}
+          var normalizeIcon = function(){updateIcon(marker,icon,normal_size,normal_anchor);}
+          google.maps.event.addListener(marker,'mouseover',activateIcon);
 
           google.maps.event.addListener(marker,'mouseout',function(){
             if(infowindow.isOpen() == false)
-              updateIcon(marker,icon,normal_size,normal_anchor);
+              normalizeIcon();
           });
 
           google.maps.event.addListener(marker, 'click', function() {
             if(infowindow.isOpen()){
               infowindow.close();
-              updateIcon(marker,icon,normal_size,normal_anchor);
+              normalizeIcon();
+              google.maps.event.removeListener(infowindow,'closeclick');
             }
             else{
-              updateIcon(marker,icon,scaled_size,scaled_anchor);
               infowindow.setContent(content);
               infowindow.open(map,marker);
+              google.maps.event.addListener(infowindow,'closeclick',normalizeIcon)
             }
           });
        
@@ -391,7 +394,7 @@
         google.maps.event.addListener(map, 'center_changed', centerChangedEventHandler);
         google.maps.event.addListener(map, 'zoom_changed', zoomChangeEventHandler);
       }
-      //google.maps.event.addDomListener(window, 'load', initialize);
+
       $.when(
         // Get all the data points for vehicle thefts
         $.getJSON('../../assets/vehicle.theft.json', function(json) {
