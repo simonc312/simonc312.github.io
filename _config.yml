@@ -43,9 +43,12 @@ other-sites:
   url: https://www.facebook.com/simonchenphotography
 
 footer-links:
-  github: simonc312
-  twitter: Simonchen312
-  linkedin: simon-chen/71/b15/149
+- url: http://github.com/simonc312
+  img: /assets/github1.png
+- url: http://twitter.com/Simonchen312
+  img: /assets/twitter1.png
+- url: http://www.linkedin.com/in/simonc312
+  img: /assets/linkedin1.png
 
 collections:
   portfolio:
