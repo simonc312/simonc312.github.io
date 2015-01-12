@@ -417,7 +417,7 @@
       }
     
       function initialize() {
-        var sanFrancisco = new google.maps.LatLng(37.77888781891173, -122.42888814282226);
+        var sanFrancisco = new google.maps.LatLng(37.78763688993816, -122.42317685292451);
         var mapOptions = {
           center: sanFrancisco,
           zoom: curZoomLevel,
