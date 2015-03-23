@@ -38,7 +38,7 @@ project-sites:
 - text: Programming Language Paradigm Map with D3
   url: /d3-programming-lang-vis
 - text: SF Crime Data Analysis with Google Maps API
-  url: /projects/sf_crime
+  url: /google-maps-sf-crime-vis
 - text: Projects That Work Ruby on Rails Application
   url: http://projects-that-work.herokuapp.com/
 - text: (New) Start Up Ciao's Landing Page
