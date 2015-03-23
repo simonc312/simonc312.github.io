@@ -36,7 +36,7 @@ navigation:
 
 project-sites:
 - text: Programming Language Paradigm Map with D3
-  url: /projects/d3
+  url: /d3-programming-lang-vis
 - text: SF Crime Data Analysis with Google Maps API
   url: /projects/sf_crime
 - text: Projects That Work Ruby on Rails Application
@@ -73,12 +73,6 @@ defaults:
     values:
       layout: "default"
       type: "pages"
-  - 
-    scope:
-      path: "/projects/d3/"
-    values:
-      layout: "cs164"
-      category: "projects"
 
   - 
     scope:

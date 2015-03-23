@@ -13,8 +13,6 @@ function toggleNav() {
 
 $(window).load(function() {
 
-    var circleDataset = [{name : "New York"},{name:"Houston"},
-    {name:"San Francisco"},{name:"Berkeley"}];
 $('.sidebar-nav li').hover(
 	function(){  $('#site-wrapper').addClass('show-nav'); },
 	function(){ }
