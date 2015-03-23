@@ -42,7 +42,7 @@ project-sites:
 - text: Projects That Work Ruby on Rails Application
   url: http://projects-that-work.herokuapp.com/
 - text: (New) Start Up Ciao's Landing Page
-  url: www.joinciao.com
+  url: http://www.joinciao.com
 
 other-sites:
 - text: flickr
