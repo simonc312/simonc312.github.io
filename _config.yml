@@ -34,6 +34,16 @@ navigation:
   glyph: 'glyphicon glyphicon-cloud'
   color: orange
 
+project-sites:
+- text: Programming Language Paradigm Map with D3
+  url: /projects/d3
+- text: SF Crime Data Analysis with Google Maps API
+  url: /projects/sf_crime
+- text: Projects That Work Ruby on Rails Application
+  url: http://projects-that-work.herokuapp.com/
+- text: (New) Start Up Ciao's Landing Page
+  url: www.joinciao.com
+
 other-sites:
 - text: flickr
   url: https://www.flickr.com/photos/floatingon
