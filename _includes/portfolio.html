@@ -1,14 +1,31 @@
 <div class="col-md-10 col-sm-offset-2">
+    {% assign post_match = false %}
     {% for post in site.posts %}
-        <div class="col-sm-3 portfolio-item">
-            <a href="#portfolioModal-{{ post.modal-id }}" class="portfolio-link" data-toggle="modal">
-                <div class="caption">
-                    <div class="caption-content">
-                        <!-- <i class="fa fa-search-plus fa-3x"></i> -->
-                    </div>
+        {% if post.url == page.url %}
+            <div class="col-sm-8">
+                <img src="/assets/portfolio/{{ post.img }}" class="float-left img-responsive">
+                <span>{{ post.description }}</span>
+                <a href="{{ post.redirect-url }}" target="_blank">Check it out here.</a>
+            </div>
+            {% assign post_match = true %}
+        {% endif %}
+        
+    {% endfor %}
+
+    {% for post in site.posts %}
+        {% if page.url == site.baseurl or page.url contains post.category and post_match == false %}
+                <div class="col-sm-3 portfolio-item">
+                    <a href="{{ post.url }}" class="portfolio-link" data-toggle="modal">
+                        <img src="/assets/portfolio/{{ post.img }}" class="img-responsive">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h3>{{ post.title }}</h3>
+                                <!-- <i class="fa fa-search-plus fa-3x"></i> -->
+                            </div>
+                        </div>
+                       
+                    </a>
                 </div>
-                <img src="assets/portfolio/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
-            </a>
-        </div>
+        {% endif %}
     {% endfor %}
 </div>

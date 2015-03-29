@@ -20,6 +20,11 @@ img.float {
   width: 100px;
 }
 
+img.float-left {
+  float: left;
+  margin-right: 20px;
+}
+
 .helper {
     display: inline-block;
     height: 100%;
@@ -32,6 +37,7 @@ img.float {
 }
 
 .clear{clear: both;}
+
 span{padding-right: 10px;}
 
 .fill-viewport-height{
@@ -43,6 +49,7 @@ span{padding-right: 10px;}
 #portfolio .portfolio-item {
     right: 0;
     margin: 0 0 15px;
+    background-color: #fff;
 }
 
 #portfolio .portfolio-item .portfolio-link {

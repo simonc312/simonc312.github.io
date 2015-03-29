@@ -3,10 +3,13 @@ layout: default
 modal-id: 2
 date: 2015-01-01
 img: ciao.png
-alt: sf crime 
+title: SF Vehicle Theft Visualization 
 project-date: January 2015
 client: myself
-category: Data Visualization 
+category: project 
+redirect-url: /google-maps-sf-crime-vis
+comments: true
+comments-offset: col-sm-offset-2
 description: Experiment using dataset processed with R Studio of vehicle thefts in SF and plotting with Google Maps API.  
 
 ---

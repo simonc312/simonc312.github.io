@@ -3,10 +3,13 @@ layout: default
 modal-id: 3
 date: 2014-09-01
 img: ciao.png
-alt: d3 plot of programming languages 
+title: Popularity of Programming Languages Visualization
 project-date: September 2014
 client: cs164 
-category: Data Visualization 
+category: project 
+redirect-url: /d3-programming-lang-vis
+comments: true
+comments-offset: col-sm-offset-2
 description: Using the popular D3 JS library to gauge popularity of programming languages by number of github repos as well as indicate paradigms each language follows.   
 
 ---
