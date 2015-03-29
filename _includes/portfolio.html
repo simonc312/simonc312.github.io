@@ -1,0 +1,14 @@
+<div class="col-md-10 col-sm-offset-2">
+    {% for post in site.posts %}
+        <div class="col-sm-3 portfolio-item">
+            <a href="#portfolioModal-{{ post.modal-id }}" class="portfolio-link" data-toggle="modal">
+                <div class="caption">
+                    <div class="caption-content">
+                        <!-- <i class="fa fa-search-plus fa-3x"></i> -->
+                    </div>
+                </div>
+                <img src="assets/portfolio/{{ post.img }}" class="img-responsive" alt="{{ post.alt }}">
+            </a>
+        </div>
+    {% endfor %}
+</div>

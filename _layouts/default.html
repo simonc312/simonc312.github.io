@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="/css/custom.css" type="text/css">
 		<link rel="stylesheet" href="/css/colors.css" type="text/css">
 		{% include favicon.html %}
@@ -18,34 +19,48 @@
 				<div id="site-wrapper">
 					<div id="site-canvas">
 						{% include header.html %}
+						<!-- {% include portfolio.html %} -->
 						<div id="site-submenu" class="col-sm-2">
 							 <h2>Submenu</h2>
-				                <p class="lead">Categories.</p>
-				                <p>Blog Entries.</p>
+				                <p class="lead">Categories</p>
+				                <p>Blog Entries</p>
 				                <ul>
 				                	<li><a href="https://medium.com/@simonchen/design-process-for-sf-vehicle-theft-crime-visualization-13b5e0b8dd50"  target="_blank">Design Process for SF Vehicle Theft Crime Visualization</a></li>
 				                </ul>
-				                <p>Places.</p>
-				                <ul>
-				                    <li>New York</li>
-				                    <li>Houston</li>
-				                </ul>
-				                <p>Projects.</p>
+				               
+				                <p>Projects</p>
 				                <ul>
 					                {% for link in site.project-sites %}
 										<li><a href="{{link.url}}">{{link.text}}</a></li>
 									{% endfor %}
 				                </ul>
 
-				                <p>Photography Sites.</p>
+				                <p>Photography Sites</p>
 				                <ul>
 					                {% for link in site.other-sites %}
 										<li><a href="{{link.url}}">{{link.text}}</a></li>
 									{% endfor %}
 				                </ul>
-            			</div>	
+            			</div>
+            			<div class="hidden col-sm-2">
+            				<p>Photography Sites</p>
+				                <ul>
+					                {% for link in site.other-sites %}
+										<li><a href="{{link.url}}">{{link.text}}</a></li>
+									{% endfor %}
+				                </ul>
+            			</div>
+
+            			<div class="hidden col-sm-2">
+            				<p>Projects</p>
+				                <ul>
+					                {% for link in site.project-sites %}
+										<li><a href="{{link.url}}">{{link.text}}</a></li>
+									{% endfor %}
+				                </ul>
+            			</div>		
 					</div>
-					{{ content }}
+					
 				</div>
   			</div>
   		</div>	

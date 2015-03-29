@@ -1,0 +1,12 @@
+---
+layout: default
+modal-id: 2
+date: 2015-01-01
+img: ciao.png
+alt: sf crime 
+project-date: January 2015
+client: myself
+category: Data Visualization 
+description: Experiment using dataset processed with R Studio of vehicle thefts in SF and plotting with Google Maps API.  
+
+---

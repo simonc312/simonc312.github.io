@@ -7,9 +7,12 @@ exclude: ['images']
 title:       Simon Chen
 img:         /assets/profile-picture.jpg
 tagline:     'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
-subscribe:   Subscribe
 url:         http://localhost:4000
 future:      true
+
+color:
+  primary: FFDC00 #yellow
+  secondary: 428BCA #twitter blue
 
 navigation:
 - text: BLOG
@@ -59,6 +62,15 @@ footer-links:
   img: /assets/twitter1.png
 - url: http://www.linkedin.com/in/simonc312
   img: /assets/linkedin1.png
+
+# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+social:
+  - title: twitter
+    url: https://twitter.com/Simonchen312
+  - title: linkedin
+    url: https://www.linkedin.com/in/simonc312
+  - title: github
+    url: http://github.com/simonc312
 
 collections:
   portfolio:
