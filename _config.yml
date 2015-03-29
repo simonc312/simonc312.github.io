@@ -28,13 +28,13 @@ navigation:
   glyph: 'glyphicon glyphicon-folder-open' 
   layout: default
   color: orange
-- text: ABOUT
-  url: /about/
-  glyph: 'glyphicon glyphicon-user'
-  color: blue
 - text: SITES
   url: /sites/
   glyph: 'glyphicon glyphicon-cloud'
+  color: blue
+- text: ABOUT
+  url: /about/
+  glyph: 'glyphicon glyphicon-user'
   color: orange
 
 project-sites:

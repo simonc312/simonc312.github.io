@@ -19,46 +19,34 @@
 				<div id="site-wrapper">
 					<div id="site-canvas">
 						{% include header.html %}
-						<!-- {% include portfolio.html %} -->
 						<div id="site-submenu" class="col-sm-2">
-							 <h2>Submenu</h2>
-				                <p class="lead">Categories</p>
-				                <p>Blog Entries</p>
+							<div id="blog-links" class=""> 
+				                <h2>Blog</h2>
 				                <ul>
 				                	<li><a href="https://medium.com/@simonchen/design-process-for-sf-vehicle-theft-crime-visualization-13b5e0b8dd50"  target="_blank">Design Process for SF Vehicle Theft Crime Visualization</a></li>
 				                </ul>
-				               
-				                <p>Projects</p>
-				                <ul>
-					                {% for link in site.project-sites %}
-										<li><a href="{{link.url}}">{{link.text}}</a></li>
-									{% endfor %}
-				                </ul>
+			                </div>
+			         
 
-				                <p>Photography Sites</p>
-				                <ul>
-					                {% for link in site.other-sites %}
-										<li><a href="{{link.url}}">{{link.text}}</a></li>
-									{% endfor %}
-				                </ul>
-            			</div>
-            			<div class="hidden col-sm-2">
-            				<p>Photography Sites</p>
-				                <ul>
-					                {% for link in site.other-sites %}
-										<li><a href="{{link.url}}">{{link.text}}</a></li>
-									{% endfor %}
-				                </ul>
-            			</div>
+	            			<div id="project-links" class="">
+	            				<h2>Projects</h2>
+					                <ul>
+						                {% for link in site.project-sites %}
+											<li><a href="{{link.url}}">{{link.text}}</a></li>
+										{% endfor %}
+					                </ul>
+	            			</div>
 
-            			<div class="hidden col-sm-2">
-            				<p>Projects</p>
-				                <ul>
-					                {% for link in site.project-sites %}
-										<li><a href="{{link.url}}">{{link.text}}</a></li>
-									{% endfor %}
-				                </ul>
-            			</div>		
+	            			<div id="other-sites" class="">
+	            				<h2>Sites</h2>
+					                <ul>
+						                {% for link in site.other-sites %}
+											<li><a href="{{link.url}}">{{link.text}}</a></li>
+										{% endfor %}
+					                </ul>
+	            			</div>		
+            			</div>
+            			
 					</div>
 					
 				</div>
