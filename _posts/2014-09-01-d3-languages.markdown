@@ -2,7 +2,7 @@
 layout: default
 modal-id: 3
 date: 2014-09-01
-img: ciao.png
+img: d3-screenshot2.png
 title: Popularity of Programming Languages Visualization
 project-date: September 2014
 client: cs164 

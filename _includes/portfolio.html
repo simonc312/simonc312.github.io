@@ -2,7 +2,7 @@
     {% assign post_match = false %}
     {% for post in site.posts %}
         {% if post.url == page.url %}
-            <div class="col-sm-8">
+            <div class="col-sm-10">
                 <img src="/assets/portfolio/{{ post.img }}" class="float-left img-responsive">
                 <span>{{ post.description }}</span>
                 <a href="{{ post.redirect-url }}" target="_blank">Check it out here.</a>

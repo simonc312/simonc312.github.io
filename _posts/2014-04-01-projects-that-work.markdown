@@ -2,7 +2,7 @@
 layout: default
 modal-id: 4
 date: 2014-04-01
-img: ciao.png
+img: projectslogo.jpg
 title: Projects That Work
 project-date: April 2014
 client: Ed Metz 

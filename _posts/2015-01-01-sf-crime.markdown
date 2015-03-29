@@ -2,7 +2,7 @@
 layout: default
 modal-id: 2
 date: 2015-01-01
-img: ciao.png
+img: sfcrime.png
 title: SF Vehicle Theft Visualization 
 project-date: January 2015
 client: myself
