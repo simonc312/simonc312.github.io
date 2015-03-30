@@ -158,8 +158,8 @@ span{padding-right: 10px;}
 .grid .portfolio-item.animate h3,
 .grid .portfolio-item.animate a,
 .grid .portfolio-item.animate span {
-  animation: showMe 1.5s linear forwards;
-  -webkit-animation: showMe 1.5s linear forwards;
+  animation: showMe 1.5s step-end forwards;
+  -webkit-animation: showMe 1.5s step-end forwards;
 }
 
 @-webkit-keyframes showMe {
@@ -168,7 +168,7 @@ span{padding-right: 10px;}
 }
 
 @keyframes showMe {
-  0% { visibility: hidden; }
+  from { visibility: hidden; }
   60%, 100% { visibility: visible; }
 }
 
