@@ -119,9 +119,14 @@ span{padding-right: 10px;}
 /* Swipe rotate */
 .grid.swipe-rotate .portfolio-item.animate .curtain {
   animation: swipeRotate 1.5s ease forwards;
+  -webkit-animation: swipeRotate 1.5s ease forwards;
 }
 
 @keyframes swipeRotate {
+  50%, 60% { transform: rotate3d(0,0,1,0deg); }
+  100% { transform: rotate3d(0,0,1,-90deg); }
+}
+@-webkit-keyframes swipeRotate {
   50%, 60% { transform: rotate3d(0,0,1,0deg); }
   100% { transform: rotate3d(0,0,1,-90deg); }
 }
@@ -129,6 +134,8 @@ span{padding-right: 10px;}
 .grid .portfolio-item.animate .curtain::after {
   animation: fadeOut 1.5s ease forwards;
   animation-delay: inherit;
+  -webkit-animation: fadeOut 1.5s ease forwards;
+  -webkit-animation-delay: inherit;
 }
 
 @keyframes fadeOut {
@@ -136,6 +143,10 @@ span{padding-right: 10px;}
   100% { opacity: 0; }
 }
 
+@-webkit-keyframes fadeOut {
+  50%, 60% { opacity: 1; }
+  100% { opacity: 0; }
+}
 .js .grid .portfolio-item img,
 .js .grid .portfolio-item h3,
 .js .grid .portfolio-item a,
