@@ -147,11 +147,11 @@ span{padding-right: 10px;}
 .grid .portfolio-item.animate h3,
 .grid .portfolio-item.animate a,
 .grid .portfolio-item.animate span {
-  animation: showMe 1.5s step-end forwards;
+  animation: showMe 1.5s linear forwards;
 }
 
 @keyframes showMe {
-  from { visibility: hidden; }
+  0% { visibility: hidden; }
   60%, 100% { visibility: visible; }
 }
 
