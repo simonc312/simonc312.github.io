@@ -148,6 +148,12 @@ span{padding-right: 10px;}
 .grid .portfolio-item.animate a,
 .grid .portfolio-item.animate span {
   animation: showMe 1.5s linear forwards;
+  -webkit-animation: showMe 1.5s linear forwards;
+}
+
+@-webkit-keyframes showMe {
+  0% { visibility: hidden; }
+  60%, 100% { visibility: visible; }
 }
 
 @keyframes showMe {
