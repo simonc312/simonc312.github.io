@@ -43,9 +43,9 @@ $(window).load(function() {
         var random_delay = Math.random()*500;
         window.setTimeout(function(){
             addCurtain($(item).find('img')[0],item);
+            $(item).addClass('animate');
         },random_delay);
        
-        $(item).addClass('animate');
     });
 
 });
