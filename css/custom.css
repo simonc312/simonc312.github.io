@@ -52,6 +52,14 @@ span{padding-right: 10px;}
   background: none;
 }
 
+.js .grid .portfolio-item{
+  display: none;
+}
+
+.js .grid.loaded .portfolio-item{
+  display: block;
+}
+
 .grid .curtain {
   position: absolute;
   top: 0;
@@ -108,13 +116,13 @@ span{padding-right: 10px;}
 }
 @-webkit-keyframes swipeRight {
   0%{}
-  50%, 60% { transform: translate(0); }
-  100% { transform: translate3d(100%,0,0); }
+  50%, 60% { -webkit-transform: translate3d(0,0,0); }
+  100% { -webkit-transform: translate3d(100%,0,0); }
 }
 @keyframes swipeRight {
   0%{}
-  50%, 60% { transform: translate(0); }
-  100% { transform: translate3d(100%,0,0); }
+  50%, 60% { transform: translate(0); -webkit-transform: translate3d(0,0,0); }
+  100% { transform: translate3d(100%,0,0); -webkit-transform: translate3d(100%,0,0); }
 }
 
 
@@ -125,13 +133,13 @@ span{padding-right: 10px;}
 }
 @-webkit-keyframes swipeDown {
   0% {}
-  50%, 60% { transform: translate(0); }
-  100% { transform: translate3d(0,-100%,0); }
+  50%, 60% { -webkit-transform: translate3d(0,0,0); }
+  100% { -webkit-transform: translate3d(0,-100%,0); }
 }
 @keyframes swipeDown {
   0% {}
-  50%, 60% { transform: translate(0); }
-  100% { transform: translate3d(0,-100%,0); }
+  50%, 60% { transform: translate(0);  -webkit-transform: translate3d(0,0,0); }
+  100% { transform: translate3d(0,-100%,0); -webkit-transform: translate3d(0,-100%,0);}
 }
 
 /* Swipe rotate */
@@ -142,13 +150,13 @@ span{padding-right: 10px;}
 
 @keyframes swipeRotate {
   0%{}
-  50%, 60% { transform: rotate3d(0,0,1,0deg); }
-  100% { transform: rotate3d(0,0,1,-90deg); }
+  50%, 60% { transform: rotate3d(0,0,1,0deg); -webkit-transform: rotate3d(0,0,1,0deg);}
+  100% { transform: rotate3d(0,0,1,-90deg); -webkit-transform: rotate3d(0,0,1,-90deg);}
 }
 @-webkit-keyframes swipeRotate {
   0% {}
-  50%, 60% { transform: rotate3d(0,0,1,0deg); }
-  100% { transform: rotate3d(0,0,1,-90deg); }
+  50%, 60% { -webkit-transform: rotate3d(0,0,1,0deg); }
+  100% { -webkit-transform: rotate3d(0,0,1,-90deg); }
 }
 
 .grid .portfolio-item.animate .curtain::after {
@@ -203,6 +211,10 @@ span{padding-right: 10px;}
 
 .grid .cover-item{
   overflow:hidden;
+  background-color: transparent;
+}
+
+.grid .cover-item.shown{
   background-color: #fff;
 }
 
@@ -210,9 +222,15 @@ span{padding-right: 10px;}
   overflow:hidden;
   text-align: center;
   margin: 10px;
-  background-color: #fff;
+  background-color: transparent;
   max-width:250px;
 }
+
+
+.grid .thumbnail-item.shown{
+  background-color: #fff;
+}
+
 
 .grid .thumbnail-item .portfolio-link .caption {
     position: absolute;
