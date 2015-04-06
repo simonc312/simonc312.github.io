@@ -4,7 +4,7 @@
         {% if post.url == page.url %}
             <div class="col-sm-12 portfolio-item cover-item">
                 <img src="/assets/portfolio/{{ post.img }}" class="float-left img-responsive">
-                <span>{{ post.description }}</span>
+                <span class="portfolio-item-description">{{ post.description }}</span>
                 <a href="{{ post.redirect-url }}" target="_blank">Check it out here.</a>
             </div>
             {% assign post_match = true %}

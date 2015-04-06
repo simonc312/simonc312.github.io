@@ -10,6 +10,6 @@ category: project
 redirect-url: /d3-programming-lang-vis
 comments: true
 comments-offset: col-sm-offset-2
-description: Using the popular D3 JS library to gauge popularity of programming languages by number of github repos as well as indicate paradigms each language follows.   
+description: Using the D3 JS library, a json dataset was processed to gauge popularity of programming languages by number of github repos. Another interesting metric was determining the influence a particular programming language had on other languages we used today (some forerunners such as Pascal or Cobol indeed such an effect). Filtering languages by paradigms they follow along with the dynamic resizing the the graph attempts to create more points of user interaction and sustained interest for inquisitive viewers.   
 
 ---
