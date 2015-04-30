@@ -4,6 +4,7 @@ modal-id: 4
 date: 2014-04-01
 img: projectslogo.jpg
 title: Projects That Work
+subtitle: Ruby on Rails Application
 project-date: April 2014
 client: Ed Metz 
 category: project 

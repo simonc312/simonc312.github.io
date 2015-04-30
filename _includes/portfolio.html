@@ -2,10 +2,13 @@
     {% assign post_match = false %}
     {% for post in site.posts %}
         {% if post.url == page.url %}
-            <div class="col-sm-12 portfolio-item cover-item">
-                <img src="/assets/portfolio/{{ post.img }}" class="float-left img-responsive">
+            <div class="col-md-6 portfolio-item cover-item">
+                <img src="/assets/portfolio/{{ post.img }}" class="img-responsive center">
+            </div>
+
+            <div class="col-md-4 cover-item shown padding">
                 <span class="portfolio-item-description">{{ post.description }}</span>
-                <a href="{{ post.redirect-url }}" target="_blank">Check it out here.</a>
+                <div class="center-block text-center"><a href="{{ post.redirect-url }}" class="btn btn-primary" target="_blank">Check It Out Here!</a></div>
             </div>
             {% assign post_match = true %}
         {% endif %}
@@ -20,7 +23,6 @@
                         <div class="caption center-block">
                             <div class="caption-content">
                                 <h3>{{ post.title }}</h3>
-                                <!-- <i class="fa fa-search-plus fa-3x"></i> -->
                             </div>
                         </div>
                        

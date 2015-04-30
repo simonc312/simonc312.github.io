@@ -4,6 +4,7 @@ modal-id: 3
 date: 2014-09-01
 img: d3-screenshot2.png
 title: Popularity of Programming Languages Visualization
+subtitle: with D3
 project-date: September 2014
 client: cs164 
 category: project 

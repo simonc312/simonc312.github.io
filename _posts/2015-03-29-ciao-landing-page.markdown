@@ -4,6 +4,7 @@ modal-id: 1
 date: 2015-03-29
 img: ciao.png
 title: Ciao App Landing Page
+subtitle: with Bootstrap and Jekyll
 project-date: March 2015
 client: Ciao Telecom
 category: project

@@ -3,7 +3,8 @@ layout: default
 modal-id: 2
 date: 2015-01-01
 img: sfcrime.png
-title: SF Vehicle Theft Visualization 
+title: SF Vehicle Theft Visualization
+subtitle: with Google Maps API 
 project-date: January 2015
 client: myself
 category: project 
