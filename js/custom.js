@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 $(window).load(function() {
-    $('.js .grid').load(function(){ $(this).addClass('loaded')});
+    //$('.js .grid').load(function(){ $(this).addClass('loaded')});
 
     $('.sidebar-nav li').hover(
     	function(){  $('#site-wrapper').addClass('show-nav'); },

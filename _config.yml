@@ -53,7 +53,7 @@ footer-links:
 - url: http://www.linkedin.com/in/simonc312
   img: /assets/linkedin1.png
 
-# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
+# Social networks usernames
 social:
   - title: twitter
     url: https://twitter.com/Simonchen312
@@ -87,6 +87,6 @@ defaults:
       path: "portfolio"
       type: "pages"
     values:
-      layout: "default" # overrides previous default layout
+      layout: "default" 
       author: "Simon Chen"
       category: "portfolio"

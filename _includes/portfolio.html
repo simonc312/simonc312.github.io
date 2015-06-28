@@ -8,7 +8,21 @@
 
             <div class="col-md-4 cover-item shown padding">
                 <span class="portfolio-item-description">{{ post.description }}</span>
-                <div class="center-block text-center"><a href="{{ post.redirect-url }}" class="btn btn-primary" target="_blank">Check It Out Here!</a></div>
+                {% if post.blog-url %}
+                <br></br>
+                    <span class="">
+                        <a href="{{ post.blog-url }}" target="_blank">
+                            Read Full Blog Post
+                        </a>
+                    </span>
+                <br></br>
+                {% endif %}
+                <div class="center-block text-center">
+                    <a href="{{ post.redirect-url }}" class="btn btn-primary" target="_blank">
+                        Check It Out Here!
+                    </a>
+                </div>
+                
             </div>
             {% assign post_match = true %}
         {% endif %}
@@ -24,8 +38,7 @@
                             <div class="caption-content">
                                 <h3>{{ post.title }}</h3>
                             </div>
-                        </div>
-                       
+                        </div>     
                     </a>
                 </div>
         {% endif %}

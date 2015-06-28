@@ -1,0 +1,246 @@
+.js .grid {
+  background: url("/assets/loader.gif") no-repeat 50% 100px;
+}
+
+.js .grid.loaded {
+  background: none;
+}
+
+.js .grid .portfolio-item{
+  display: none;
+}
+
+.js .grid.loaded .portfolio-item{
+  display: block;
+}
+
+.grid span.portfolio-item-description, .grid a{
+  line-height: 22px;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.grid .curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index:100;
+  background: #96cdc8;
+}
+
+.grid.swipe-right .curtain {
+  -webkit-transform: translate3d(-100%,0,0);
+  transform: translate3d(-100%,0,0);
+}
+
+.grid.swipe-down .curtain {
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+.grid.swipe-rotate .curtain {
+  width: 200%;
+  height: 200%;
+  transform: rotate3d(0,0,1,90deg);
+  transform-origin: top left;
+  -webkit-transform: rotate3d(0,0,1,90deg);
+  -webkit-transform-origin: top left;
+}
+
+/*Shadow effect*/
+.grid .curtain::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,1);
+  content: '';
+}
+
+.grid.swipe-right .curtain::after,
+.grid.swipe-rotate .curtain::after {
+  left: -100%;
+}
+
+.grid.swipe-down .curtain::after {
+  top: -100%;
+}
+
+/* Swipe right */
+.grid.swipe-right .portfolio-item.animate .curtain {
+  -webkit-animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
+  animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
+}
+@-webkit-keyframes swipeRight {
+  0%{}
+  50%, 60% { -webkit-transform: translate3d(0,0,0); }
+  100% { -webkit-transform: translate3d(100%,0,0); }
+}
+@keyframes swipeRight {
+  0%{}
+  50%, 60% { transform: translate(0); -webkit-transform: translate3d(0,0,0); }
+  100% { transform: translate3d(100%,0,0); -webkit-transform: translate3d(100%,0,0); }
+}
+
+
+/* Swipe down */
+.grid.swipe-down .portfolio-item.animate .curtain {
+  -webkit-animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
+  animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
+}
+@-webkit-keyframes swipeDown {
+  0% {}
+  50%, 60% { -webkit-transform: translate3d(0,0,0); }
+  100% { -webkit-transform: translate3d(0,-100%,0); }
+}
+@keyframes swipeDown {
+  0% {}
+  50%, 60% { transform: translate(0);  -webkit-transform: translate3d(0,0,0); }
+  100% { transform: translate3d(0,-100%,0); -webkit-transform: translate3d(0,-100%,0);}
+}
+
+/* Swipe rotate */
+.grid.swipe-rotate .portfolio-item.animate .curtain {
+  animation: swipeRotate 1.5s ease forwards;
+  -webkit-animation: swipeRotate 1.5s ease forwards;
+}
+
+@keyframes swipeRotate {
+  0%{}
+  50%, 60% { transform: rotate3d(0,0,1,0deg); -webkit-transform: rotate3d(0,0,1,0deg);}
+  100% { transform: rotate3d(0,0,1,-90deg); -webkit-transform: rotate3d(0,0,1,-90deg);}
+}
+@-webkit-keyframes swipeRotate {
+  0% {}
+  50%, 60% { -webkit-transform: rotate3d(0,0,1,0deg); }
+  100% { -webkit-transform: rotate3d(0,0,1,-90deg); }
+}
+
+.grid .portfolio-item.animate .curtain::after {
+  animation: fadeOut 1.5s ease forwards;
+  animation-delay: inherit;
+  -webkit-animation: fadeOut 1.5s ease forwards;
+  -webkit-animation-delay: inherit;
+}
+
+@keyframes fadeOut {
+  0% {}
+  50%, 65% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {}
+  50%, 65% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.js .grid .portfolio-item img,
+.js .grid .portfolio-item h3,
+.js .grid .portfolio-item a,
+.js .grid .portfolio-item span {
+  visibility: hidden;
+}
+
+.grid .portfolio-item.animate img,
+.grid .portfolio-item.animate h3,
+.grid .portfolio-item.animate a,
+.grid .portfolio-item.animate span {
+  animation: showMe 1.5s step-end forwards;
+  -webkit-animation: showMe 1.5s step-end forwards;
+}
+
+@-webkit-keyframes showMe {
+  from { visibility: hidden; }
+  65%, 100% { visibility: visible; }
+}
+
+@keyframes showMe {
+  from { visibility: hidden; }
+  65%, 100% { visibility: visible; }
+}
+
+.grid .portfolio-item.shown img,
+.grid .portfolio-item.shown h3,
+.grid .portfolio-item.shown a,
+.grid .portfolio-item.shown span {
+  visibility: visible;
+}
+
+.grid .cover-item{
+  overflow:hidden;
+  background-color: transparent;
+}
+
+.grid .cover-item.shown{
+  background-color: #fff;
+}
+
+.grid .cover-item.shown.padding {
+  padding: 10px;
+}
+
+.grid .thumbnail-item {
+  overflow:hidden;
+  text-align: center;
+  margin: 0px;
+  background-color: transparent;
+  max-width:250px;
+}
+
+
+.grid .thumbnail-item.shown{
+  background-color: #fff;
+}
+
+
+.grid .thumbnail-item .portfolio-link .caption {
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    top: 0;
+    opacity: 0;
+    z-index:3;
+    background: rgba(24,188,156,.9);
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
+    transition: all ease .5s;
+}
+
+.grid .thumbnail-item .portfolio-link .caption:hover {
+    text-decoration:none;
+    opacity: 1;
+}
+
+.grid .thumbnail-item .portfolio-link .caption .caption-content {
+    position: absolute;
+    margin:5px;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+}
+
+.thumbnail-item .portfolio-link .caption .caption-content i {
+    margin-top: -12px;
+}
+
+.grid .thumbnail-item .portfolio-link .caption .caption-content h3,
+.grid .thumbnail-item .portfolio-link .caption .caption-content h4,
+.grid .cover-item img {
+    vertical-align:middle;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid * {
+    z-index: 2;
+}
+
+@media(min-width:768px) {
+    .grid .portfolio-item {
+        margin: 10px;
+    }
+}
