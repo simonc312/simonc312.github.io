@@ -62,6 +62,10 @@ social:
   - title: github
     url: http://github.com/simonc312
 
+sass:
+  sass_dir: _sass
+  style: compressed
+
 collections:
   portfolio:
       output: true
@@ -69,6 +73,7 @@ collections:
   projects:
       output: true
       permalink: /projects/:path/
+
 defaults: 
   - scope:
       path: ""

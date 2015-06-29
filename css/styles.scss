@@ -1,3 +1,17 @@
+---
+# Front matter comment to ensure Jekyll properly reads file.
+---
+
+// Imports
+@import "nav-bar";
+@import "portfolio-items";
+@import "social-media";
+@import "colors";
+
+/*Primary Site Colors */
+$primary-color: #FFDC00;
+$secondary-color: #428BCA; 
+
 @-ms-viewport{
     width: extend-to-zoom;
     zoom: 1.0;
@@ -57,7 +71,7 @@ span{padding-right: 10px;}
     width: 40px;
     height: 40px;
     border: 2px solid;
-    border-color: #{{ site.color.secondary }};
+    border-color: secondary-color;
     border-radius: 100%;
 }
 
@@ -70,9 +84,9 @@ span{padding-right: 10px;}
 .btn-outline {
     margin-top: 15px;
     border: solid 2px;
-    border-color: #{{ site.color.secondary }};
+    border-color: secondary-color;
     font-size: 20px;
-    color: #{{ site.color.secondary }};
+    color: secondary-color;
     background: 0 0;
     transition: all .3s ease-in-out;
 }
@@ -82,9 +96,9 @@ span{padding-right: 10px;}
 .btn-outline:active,
 .btn-outline.active {
     border: solid 2px;
-    border-color:; #{{ site.color.secondary }};
-    color: #{{ site.color.secondary }};
-    background: #{{ site.color.primary }};
+    border-color: secondary-color;
+    color: secondary-color;
+    background: primary-color;
 }
 
 
