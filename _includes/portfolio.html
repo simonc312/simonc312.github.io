@@ -6,8 +6,8 @@
                 <img src="/assets/portfolio/{{ post.img }}" class="img-responsive center">
             </div>
 
-            <div class="col-md-4 cover-item shown padding">
-                <span class="portfolio-item-description">{{ post.description }}</span>
+            <div class="col-md-6 cover-item shown padding">
+                <span class="portfolio-item-description">{{ post.content }}</span>
                 {% if post.blog-url %}
                 <br></br>
                     <span class="">
@@ -24,6 +24,17 @@
                 </div>
                 
             </div>
+
+            {% if post.extra-images %}
+
+            <!-- Add the extra clearfix for only the required viewport -->
+            <div class="clearfix visible-xs-block"></div>
+
+                <div class="col-md-4 portfolio-item cover-item">
+                    <img src="/assets/portfolio/{{ post.extra-images }}" class="img-responsive center">
+                </div>
+            {% endif %}
+
             {% assign post_match = true %}
         {% endif %}
         
