@@ -8,7 +8,7 @@ subtitle: with Bootstrap and Jekyll
 project-date: March 2015
 client: Ciao Telecom
 category: project
-redirect-url: http://www.joinciao.com
+redirect-url: http://ciaoapp.github.io
 comments: true
 comments-offset: col-sm-offset-2    
 
@@ -17,3 +17,7 @@ comments-offset: col-sm-offset-2
 This is a simple landing page for introducing Ciao's features and benefits based on Freelancer jekyll theme. There were a few additions to the base theme added such as a swipeable Bootstrap carousel on touchscreens, changing the contact form fields, and jQuery easing to the next container view on down or up arrow keypresses. 
 
 The idea was to quickly present all the information about Ciao to a prospective customer and make their experience browsing the website as smooth and comfortable and intuitive as possible. The risk of conforming to the conventions of a Bootstrap powered landing site is that it looks like many other start up pages, but the power of convention reduces a learning curve and matches user expectations.  
+
+*Update* The Ciao App landing site was used to test rebranding into Poptalk, so it looks half-done with new logo and placeholder images. The finished landing site can be found here at [joinpoptalk.com][1].
+
+[1]: http://www.joinpoptalk.com
