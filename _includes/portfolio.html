@@ -27,12 +27,13 @@
 
             {% if post.extra-images %}
 
-            <!-- Add the extra clearfix for only the required viewport -->
-            <div class="clearfix visible-xs-block"></div>
+                {% for image in post.extra-images %}
 
-                <div class="col-md-4 portfolio-item cover-item">
-                    <img src="/assets/portfolio/{{ post.extra-images }}" class="img-responsive center">
-                </div>
+                    <div class="col-md-5 portfolio-item cover-item">
+                        <img src="/assets/portfolio/{{ image }}" class="img-responsive center">
+                    </div>
+
+                {% endfor %}
             {% endif %}
 
             {% assign post_match = true %}
