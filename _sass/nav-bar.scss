@@ -1,3 +1,5 @@
+@import "colors";
+
 @media only screen and (min-width : 768px) {
   /* Make Navigation Toggle on Desktop Hover */
   .dropdown:hover .dropdown-menu {
@@ -8,12 +10,16 @@
 /* pad body from header in mobile mode */
 @media (max-width: 768px){
 
-  body{padding-top: 100px;}
+  body{
+    padding-top: 100px;
+  }
 
-  .navbar .sidebar-nav li { margin-top: 20%;
+  .navbar .sidebar-nav li { 
+    margin-top: 20%;
     margin-bottom: 20%;
     margin-right: 0%;
-    margin-left: 0%;}
+    margin-left: 0%;
+  }
 
   #site-submenu {
     visibility: hidden;
@@ -30,7 +36,10 @@
 
   .navbar-default{
     height: 100vh;
+    padding-left: 10px;
+    padding-right: 10px;
   }
+
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -49,7 +58,7 @@
   .sidebar-nav .navbar li a {
     padding-top: 12px;
     padding-bottom: 12px;
-    padding-left: 10px;
+    padding-left: 0px;
     padding-right: 0px;
   }
 
@@ -80,7 +89,7 @@
     height: 100vh;
     position: absolute;
     top: 0;
-    background: #FFDC00;
+    background: $primary-color;
     padding: 15px;
   }
 

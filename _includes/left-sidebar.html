@@ -28,7 +28,9 @@
 			    	{% endif %}
 
 			    	<li class="{{ current }}">
-			        	<a href="{{ link.url }}"><span class="{{ link.glyph }} {{ link.color }}"></span>{{ link.text }}</a>
+			        	<a href="{{ link.url }}">
+                  <span class="{{ link.glyph }} {{ link.color }}"></span>{{ link.text }}
+                </a>
 			      	</li>
 			  	{% endfor %}
 			</ul>
@@ -37,7 +39,9 @@
                 <ul class="list-inline">
                     {% for network in site.social %}
                     <li>
-                        <a href="{{ network.url }}" class="btn-social btn-outline"><i class="fa fa-fw fa-{{ network.title }}"></i></a>
+                        <a href="{{ network.url }}" class="btn-social btn-outline">
+                          <i class="fa fa-fw fa-{{ network.title }}"></i>
+                        </a>
                     </li>
                     {% endfor %}
                 </ul>

@@ -8,10 +8,6 @@
 @import "social-media";
 @import "colors";
 
-/*Primary Site Colors */
-$primary-color: #FFDC00;
-$secondary-color: #428BCA; 
-
 @-ms-viewport{
     width: extend-to-zoom;
     zoom: 1.0;
@@ -59,21 +55,12 @@ span{padding-right: 10px;}
 
 .list-inline{
   list-style-type: none;
-  display: inline;
-  padding-right: 10px;
 }
 
 /* Footer CSS */
 
 .footer-col{margin:0;}
-.btn-social {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 2px solid;
-    border-color: secondary-color;
-    border-radius: 100%;
-}
+
 
 .btn:focus,
 .btn:active,
@@ -81,25 +68,7 @@ span{padding-right: 10px;}
     outline: 0;
 }
 
-.btn-outline {
-    margin-top: 15px;
-    border: solid 2px;
-    border-color: secondary-color;
-    font-size: 20px;
-    color: secondary-color;
-    background: 0 0;
-    transition: all .3s ease-in-out;
-}
 
-.btn-outline:hover,
-.btn-outline:focus,
-.btn-outline:active,
-.btn-outline.active {
-    border: solid 2px;
-    border-color: secondary-color;
-    color: secondary-color;
-    background: primary-color;
-}
 
 
 
