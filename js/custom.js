@@ -48,4 +48,9 @@ $(window).load(function() {
        
     });
 
+    // try to make height of submenu match window 
+/*    $(window).resize(function(){
+      $('#site-submenu').height($(window).height());
+    });*/
+
 });

@@ -86,11 +86,16 @@
   }
 
   #site-submenu {
-    height: 100vh;
+    /* height: 100vh; */
     position: absolute;
     top: 0;
+    bottom: 0;
+    //margin-bottom: -101%;
+    //padding-bottom: 101%;
+    padding-left: 15px;
+    padding-right: 15px;
     background: $primary-color;
-    padding: 15px;
+    
   }
 
   #site-canvas {
