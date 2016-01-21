@@ -48,4 +48,9 @@ $(window).load(function() {
        
     });
 
+    // try to make height of submenu match document 
+    $(document).ready(function(){
+      $('#site-submenu').height($(document).height());
+    });
+
 });
