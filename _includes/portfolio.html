@@ -1,4 +1,4 @@
-<div class="grid swipe-right col-md-10 col-sm-offset-2">
+<div class="grid swipe-right col-sm-8 col-md-10 col-sm-offset-2">
     {% assign post_match = false %}
     {% for post in site.posts %}
         {% if post.url == page.url %}
@@ -41,18 +41,7 @@
         
     {% endfor %}
 
-    {% for post in site.posts %}
-        {% if page.url == site.baseurl or page.url contains post.category and post_match == false %}
-                <div class="col-sm-3 portfolio-item thumbnail-item">
-                    <a href="{{ post.url }}" class="portfolio-link" data-toggle="modal">
-                        <img src="/assets/portfolio/{{ post.img }}" class="center-block img-responsive">
-                        <div class="caption center-block">
-                            <div class="caption-content">
-                                <h3>{{ post.title }}</h3>
-                            </div>
-                        </div>     
-                    </a>
-                </div>
-        {% endif %}
-    {% endfor %}
+    {% if post_match == false %}
+      {% include portfolio-thumbnail.html %}
+    {% endif %}
 </div>
