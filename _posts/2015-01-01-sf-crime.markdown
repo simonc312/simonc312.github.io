@@ -7,7 +7,7 @@ title: SF Vehicle Theft Visualization
 subtitle: with Google Maps API 
 project-date: January 2015
 client: myself
-category: project 
+category: project blog 
 redirect-url: /google-maps-sf-crime-vis
 blog-url: https://medium.com/@simonchen/design-process-for-sf-vehicle-theft-crime-visualization-13b5e0b8dd50
 comments: true
