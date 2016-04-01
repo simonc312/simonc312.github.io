@@ -1,0 +1,17 @@
+<div class="grid swipe-right col-md-10 col-sm-offset-2">
+  {% for post in site.posts %}
+
+    {% if post.category contains 'blog' %}
+      <div class="col-sm-3 portfolio-item thumbnail-item">
+        <a href="{{ post.url }}" class="portfolio-link" data-toggle="modal">
+            <img src="/assets/portfolio/{{ post.img }}" class="center-block img-responsive">
+            <div class="caption center-block">
+                <div class="caption-content">
+                    <h3>{{ post.title }}</h3>
+                </div>
+            </div>     
+        </a>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

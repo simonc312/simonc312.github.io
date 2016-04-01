@@ -81,14 +81,7 @@ defaults:
       layout: "default"
       type: "pages"
 
-  - 
-    scope:
-      path: "/projects/sf_crime/"
-    values:
-      layout: "SFcrime"
-      category: "projects"
-  -
-    scope:
+  - scope:
       path: "portfolio"
       type: "pages"
     values:
