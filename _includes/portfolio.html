@@ -42,6 +42,10 @@
     {% endfor %}
 
     {% if post_match == false %}
-      {% include portfolio-thumbnail.html %}
+      {% if page.url contains 'project' %}
+        {% include portfolio-thumbnail.html %}
+      {% else %}
+        {% include blog.html %}
+      {% endif %}    
     {% endif %}
 </div>
