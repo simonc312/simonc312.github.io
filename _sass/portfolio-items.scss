@@ -1,5 +1,4 @@
-$thumbnail-item-size: 200px;
-$thumbnail-item-caption-background: rgba(24,188,156,.9);
+@import"space_theme";
 
 .object-fit{
   object-fit: cover;
@@ -144,19 +143,18 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
   50%, 65% { opacity: 1; }
   100% { opacity: 0; }
 }
-.js .grid .portfolio-item img,
-.js .grid .portfolio-item h3,
-.js .grid .portfolio-item a,
-.js .grid .portfolio-item span {
-  visibility: hidden;
+
+.js .grid .portfolio-item {
+  img, h3, a, span {
+    visibility: hidden;
+  }
 }
 
-.grid .portfolio-item.animate img,
-.grid .portfolio-item.animate h3,
-.grid .portfolio-item.animate a,
-.grid .portfolio-item.animate span {
-  animation: showMe 1.5s step-end forwards;
-  -webkit-animation: showMe 1.5s step-end forwards;
+.grid .portfolio-item.animate {
+  img, h3, a, span {
+    animation: showMe 1.5s step-end forwards;
+    -webkit-animation: showMe 1.5s step-end forwards;
+  }
 }
 
 @-webkit-keyframes showMe {
@@ -169,19 +167,21 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
   65%, 100% { visibility: visible; }
 }
 
-.grid .portfolio-item.shown img,
-.grid .portfolio-item.shown h3,
-.grid .portfolio-item.shown a,
-.grid .portfolio-item.shown span {
-  visibility: visible;
+.grid .portfolio-item.shown {
+  background-color: $grid-item-image-background;
+
+  img, h3, a, span {
+    visibility: visible;
+  }
 }
+
 
 .grid .cover-item{
   overflow:hidden;
-  background-color: transparent;
+  background-color: $grid-item-image-background;
 }
 
-.grid .cover-item.shown{
+.grid .cover-item.description.shown{
   background-color: #fff;
 }
 
@@ -192,7 +192,7 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
 .grid .thumbnail-item {
   overflow:hidden;
   margin: 0px;
-  background-color: transparent;
+  background-color: $grid-item-image-background;
   max-width: $thumbnail-item-size;
 }
 
@@ -242,7 +242,7 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
 }
 
 .grid .portfolio-item {
-  margin: 10px;
+  margin: $grid-item-margin;
 }
 
 

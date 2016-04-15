@@ -3,6 +3,7 @@
 ---
 
 // Imports
+@import "space_theme";
 @import "nav-bar";
 @import "portfolio-items";
 @import "social-media";
@@ -41,7 +42,7 @@ img.float-left {
 }
 
 .background-pattern{
-  background-image: url("/assets/gplaypattern.png");
+  background-image: url($background-url);
   background-repeat:repeat; 
 }
 
