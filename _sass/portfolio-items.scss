@@ -1,16 +1,17 @@
 @import"space_theme";
+@import "animations";
 
 .object-fit{
   object-fit: cover;
 }
 
 .js .grid {
-  background: url("/assets/loader.gif") no-repeat 50% 100px;
+  background: url($loading-animation-path) no-repeat 50% 100px;
 }
 
 .js .grid.loaded {
   background: none;
-}thumbnail-item
+}
 
 .js .grid .portfolio-item{
   display: none;
@@ -80,32 +81,11 @@
   -webkit-animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
   animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
 }
-@-webkit-keyframes swipeRight {
-  0%{}
-  50%, 60% { -webkit-transform: translate3d(0,0,0); }
-  100% { -webkit-transform: translate3d(100%,0,0); }
-}
-@keyframes swipeRight {
-  0%{}
-  50%, 60% { transform: translate(0); -webkit-transform: translate3d(0,0,0); }
-  100% { transform: translate3d(100%,0,0); -webkit-transform: translate3d(100%,0,0); }
-}
-
 
 /* Swipe down */
 .grid.swipe-down .portfolio-item.animate .curtain {
   -webkit-animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
   animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
-}
-@-webkit-keyframes swipeDown {
-  0% {}
-  50%, 60% { -webkit-transform: translate3d(0,0,0); }
-  100% { -webkit-transform: translate3d(0,-100%,0); }
-}
-@keyframes swipeDown {
-  0% {}
-  50%, 60% { transform: translate(0);  -webkit-transform: translate3d(0,0,0); }
-  100% { transform: translate3d(0,-100%,0); -webkit-transform: translate3d(0,-100%,0);}
 }
 
 /* Swipe rotate */
@@ -114,34 +94,11 @@
   -webkit-animation: swipeRotate 1.5s ease forwards;
 }
 
-@keyframes swipeRotate {
-  0%{}
-  50%, 60% { transform: rotate3d(0,0,1,0deg); -webkit-transform: rotate3d(0,0,1,0deg);}
-  100% { transform: rotate3d(0,0,1,-90deg); -webkit-transform: rotate3d(0,0,1,-90deg);}
-}
-@-webkit-keyframes swipeRotate {
-  0% {}
-  50%, 60% { -webkit-transform: rotate3d(0,0,1,0deg); }
-  100% { -webkit-transform: rotate3d(0,0,1,-90deg); }
-}
-
 .grid .portfolio-item.animate .curtain::after {
   animation: fadeOut 1.5s ease forwards;
   animation-delay: inherit;
   -webkit-animation: fadeOut 1.5s ease forwards;
   -webkit-animation-delay: inherit;
-}
-
-@keyframes fadeOut {
-  0% {}
-  50%, 65% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@-webkit-keyframes fadeOut {
-  0% {}
-  50%, 65% { opacity: 1; }
-  100% { opacity: 0; }
 }
 
 .js .grid .portfolio-item {
@@ -157,16 +114,6 @@
   }
 }
 
-@-webkit-keyframes showMe {
-  from { visibility: hidden; }
-  65%, 100% { visibility: visible; }
-}
-
-@keyframes showMe {
-  from { visibility: hidden; }
-  65%, 100% { visibility: visible; }
-}
-
 .grid .portfolio-item.shown {
   background-color: $grid-item-image-background;
 
@@ -174,7 +121,6 @@
     visibility: visible;
   }
 }
-
 
 .grid .cover-item{
   overflow:hidden;
@@ -198,7 +144,7 @@
 
 
 .grid .thumbnail-item.shown{
-  background-color: #fff;
+  background-color: $grid-item-image-background;
 }
 
 
