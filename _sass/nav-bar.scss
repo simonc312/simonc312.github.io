@@ -40,6 +40,14 @@
       float: right !important;
     }
 
+    .navbar-fixed-top {
+      transition: transform 0.5s;
+    }
+
+    .navbar-slide-up {
+      transform: translate(0%,-100%);
+    }
+
 }
 
 /* make sidebar nav vertical */ 
