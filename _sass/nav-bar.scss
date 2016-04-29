@@ -118,6 +118,11 @@
     padding-left: 15px;
     padding-right: 15px;
     background: $primary-color;
+    color: $primary-text-color !important;
+
+      a {
+        color: $primary-text-color !important;
+      }
     
   }
 
