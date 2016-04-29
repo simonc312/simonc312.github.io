@@ -4,19 +4,19 @@
 		<div class="navbar-header logo">
 			<div class="media">
 				
-				<a data-src:"holder.js/100x100" class="pull-left" href="{{ site.baseurl }}">
-					<img class="img-responsive media-object" src="/assets/favicons/logo2.png" alt="SC">
+				<a class="pull-left" href="{{ site.baseurl }}">
+					<img class="media-object logo" src="/assets/favicons/logo2.png" alt="SC">
 				</a>
 				
 			</div>
 		
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
+	      <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-            </button>
-          <span class="visible-xs navbar-brand">show menu</span>
+      </button>
+      <span class="visible-xs navbar-brand">show menu</span>
 		</div>
 
 		<div class="navbar-collapse collapse sidebar-navbar-collapse">
@@ -36,16 +36,16 @@
 			</ul>
 
 			<div id="sidebar-social-nav"class="footer-col col-md-4">
-                <ul class="list-inline">
-                    {% for network in site.social %}
-                    <li>
-                        <a href="{{ network.url }}" class="btn-social btn-outline">
-                          <i class="fa fa-fw fa-{{ network.title }}"></i>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+          <ul class="list-inline">
+              {% for network in site.social %}
+              <li>
+                  <a href="{{ network.url }}" class="btn-social btn-outline">
+                    <i class="fa fa-fw fa-{{ network.title }}"></i>
+                  </a>
+              </li>
+              {% endfor %}
+          </ul>
+      </div>
 		</div>
 	</nav>
 </div>
