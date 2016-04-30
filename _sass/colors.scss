@@ -18,10 +18,35 @@
 */
 
 /*Primary Site Colors */
-$primary-color: #696BB6;
+$primary-color: #47499A;//#696BB6;
 $secondary-color: #3A6B8E;
 $banner-color: #3A6B8E;
 $primary-text-color: white;
+$container-color: #E5F0F8;
+
+.background-primary-color {
+  background-color: $primary-color;
+}
+
+.background-secondary-color {
+  background-color: $secondary-color;
+}
+
+.background-banner-color {
+  background-color: $banner-color;
+}
+
+.primary-color {
+  color: $primary-color;
+}
+
+.secondary-color {
+  color: $secondary-color;
+}
+
+.banner-color {
+  color: $banner-color;
+}
 
 /* Backgrounds */
 .bg-navy {
