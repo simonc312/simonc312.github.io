@@ -1,6 +1,7 @@
 @import "colors";
 $navbar-max-width : 240px;
 $submenu-max-width : $navbar-max-width+ 32px;
+$site-canvas-translate : 15vw;
 
 .navbar-default {
   background-color: $container-color !important;
@@ -143,8 +144,8 @@ $submenu-max-width : $navbar-max-width+ 32px;
     backface-visibility: hidden;
   }
   .show-nav #site-canvas {
-    -webkit-transform: translateZ(0) translateX(16vw);  
-    transform: translateZ(0) translateX(16vw);  
+    -webkit-transform: translateZ(0) translateX($site-canvas-translate);  
+    transform: translateZ(0) translateX($site-canvas-translate);  
   }
 
 
