@@ -128,11 +128,11 @@
 }
 
 .grid .cover-item.description.shown{
-  background-color: #fff;
+  background-color: $container-color;;
 }
 
 .grid .cover-item.shown.padding {
-  padding: 10px;
+  padding: 16px;
 }
 
 .grid .thumbnail-item {
@@ -168,9 +168,9 @@
 }
 
 .grid .thumbnail-item .portfolio-link .caption .caption-content {
-    padding: 1em;
+    padding: 2em;
     position: absolute;
-    color: #fff;
+    color: $primary-text-color;
 }
 
 .thumbnail-item .portfolio-link .caption .caption-content i {
