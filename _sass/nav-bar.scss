@@ -1,4 +1,6 @@
 @import "colors";
+$navbar-max-width : 240px;
+$submenu-max-width : $navbar-max-width+ 32px;
 
 .navbar-default {
   background-color: $container-color !important;
@@ -67,6 +69,7 @@
     height: 100vh;
     padding-left: $default-padding;
     padding-right: $default-padding;
+    max-width: $navbar-max-width;
   }
 
   .sidebar-nav .navbar .navbar-collapse {
@@ -119,6 +122,7 @@
     position: absolute;
     top: 0;
     bottom: 0;
+    max-width: $submenu-max-width;
     //margin-bottom: -101%;
     //padding-bottom: 101%;
     padding-left: $default-padding;
