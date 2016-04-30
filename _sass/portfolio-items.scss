@@ -1,17 +1,17 @@
-$thumbnail-item-size: 200px;
-$thumbnail-item-caption-background: rgba(24,188,156,.9);
+@import"space_theme";
+@import "animations";
 
 .object-fit{
   object-fit: cover;
 }
 
 .js .grid {
-  background: url("/assets/loader.gif") no-repeat 50% 100px;
+  background: url($loading-animation-path) no-repeat 50% 100px;
 }
 
 .js .grid.loaded {
   background: none;
-}thumbnail-item
+}
 
 .js .grid .portfolio-item{
   display: none;
@@ -81,49 +81,17 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
   -webkit-animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
   animation: swipeRight 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
 }
-@-webkit-keyframes swipeRight {
-  0%{}
-  50%, 60% { -webkit-transform: translate3d(0,0,0); }
-  100% { -webkit-transform: translate3d(100%,0,0); }
-}
-@keyframes swipeRight {
-  0%{}
-  50%, 60% { transform: translate(0); -webkit-transform: translate3d(0,0,0); }
-  100% { transform: translate3d(100%,0,0); -webkit-transform: translate3d(100%,0,0); }
-}
-
 
 /* Swipe down */
 .grid.swipe-down .portfolio-item.animate .curtain {
   -webkit-animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
   animation: swipeDown 1.5s cubic-bezier(0.6,0,0.4,1) forwards;
 }
-@-webkit-keyframes swipeDown {
-  0% {}
-  50%, 60% { -webkit-transform: translate3d(0,0,0); }
-  100% { -webkit-transform: translate3d(0,-100%,0); }
-}
-@keyframes swipeDown {
-  0% {}
-  50%, 60% { transform: translate(0);  -webkit-transform: translate3d(0,0,0); }
-  100% { transform: translate3d(0,-100%,0); -webkit-transform: translate3d(0,-100%,0);}
-}
 
 /* Swipe rotate */
 .grid.swipe-rotate .portfolio-item.animate .curtain {
   animation: swipeRotate 1.5s ease forwards;
   -webkit-animation: swipeRotate 1.5s ease forwards;
-}
-
-@keyframes swipeRotate {
-  0%{}
-  50%, 60% { transform: rotate3d(0,0,1,0deg); -webkit-transform: rotate3d(0,0,1,0deg);}
-  100% { transform: rotate3d(0,0,1,-90deg); -webkit-transform: rotate3d(0,0,1,-90deg);}
-}
-@-webkit-keyframes swipeRotate {
-  0% {}
-  50%, 60% { -webkit-transform: rotate3d(0,0,1,0deg); }
-  100% { -webkit-transform: rotate3d(0,0,1,-90deg); }
 }
 
 .grid .portfolio-item.animate .curtain::after {
@@ -133,72 +101,50 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
   -webkit-animation-delay: inherit;
 }
 
-@keyframes fadeOut {
-  0% {}
-  50%, 65% { opacity: 1; }
-  100% { opacity: 0; }
+.js .grid .portfolio-item {
+  img, h3, a, span {
+    visibility: hidden;
+  }
 }
 
-@-webkit-keyframes fadeOut {
-  0% {}
-  50%, 65% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.js .grid .portfolio-item img,
-.js .grid .portfolio-item h3,
-.js .grid .portfolio-item a,
-.js .grid .portfolio-item span {
-  visibility: hidden;
+.grid .portfolio-item.animate {
+  img, h3, a, span {
+    animation: showMe 1.5s step-end forwards;
+    -webkit-animation: showMe 1.5s step-end forwards;
+  }
 }
 
-.grid .portfolio-item.animate img,
-.grid .portfolio-item.animate h3,
-.grid .portfolio-item.animate a,
-.grid .portfolio-item.animate span {
-  animation: showMe 1.5s step-end forwards;
-  -webkit-animation: showMe 1.5s step-end forwards;
-}
+.grid .portfolio-item.shown {
+  background-color: $grid-item-image-background;
 
-@-webkit-keyframes showMe {
-  from { visibility: hidden; }
-  65%, 100% { visibility: visible; }
-}
-
-@keyframes showMe {
-  from { visibility: hidden; }
-  65%, 100% { visibility: visible; }
-}
-
-.grid .portfolio-item.shown img,
-.grid .portfolio-item.shown h3,
-.grid .portfolio-item.shown a,
-.grid .portfolio-item.shown span {
-  visibility: visible;
+  img, h3, a, span {
+    visibility: visible;
+  }
 }
 
 .grid .cover-item{
   overflow:hidden;
-  background-color: transparent;
+  background-color: $grid-item-image-background;
 }
 
-.grid .cover-item.shown{
-  background-color: #fff;
+.grid .cover-item.description.shown{
+  background-color: $container-color;;
 }
 
 .grid .cover-item.shown.padding {
-  padding: 10px;
+  padding: 16px;
 }
 
 .grid .thumbnail-item {
   overflow:hidden;
   margin: 0px;
-  background-color: transparent;
+  background-color: $grid-item-image-background;
   max-width: $thumbnail-item-size;
 }
 
 
 .grid .thumbnail-item.shown{
-  background-color: #fff;
+  background-color: $grid-item-image-background;
 }
 
 
@@ -222,10 +168,9 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
 }
 
 .grid .thumbnail-item .portfolio-link .caption .caption-content {
-    flex: 1 1 50%;
-    padding: 1em;
+    padding: 2em;
     position: absolute;
-    color: #fff;
+    color: $primary-text-color;
 }
 
 .thumbnail-item .portfolio-link .caption .caption-content i {
@@ -243,7 +188,7 @@ $thumbnail-item-caption-background: rgba(24,188,156,.9);
 }
 
 .grid .portfolio-item {
-  margin: 10px;
+  margin: $grid-item-margin;
 }
 
 

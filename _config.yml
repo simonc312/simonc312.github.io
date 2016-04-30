@@ -11,31 +11,31 @@ url:         http://localhost:4000
 future:      true
 
 color:
-  primary: FFDC00 #yellow
-  secondary: 428BCA #twitter blue
+  primary: FFDC00
+  secondary: 428BCA
 
 navigation:
 - text: BLOG
   url: /blog/
   glyph: 'glyphicon glyphicon-comment'
-  color: orange
+  color: banner-color
 - text: PORTFOLIO
   url: /portfolio/
   glyph: 'glyphicon glyphicon-camera'
-  color: blue
+  color: primary-color
 - text: PROJECTS
   url: /projects/
   glyph: 'glyphicon glyphicon-folder-open' 
   layout: default
-  color: orange
+  color: banner-color
 - text: SITES
   url: /sites/
   glyph: 'glyphicon glyphicon-cloud'
-  color: blue
+  color: primary-color
 - text: ABOUT
   url: /about/
   glyph: 'glyphicon glyphicon-user'
-  color: orange
+  color: banner-color
 
 other-sites:
 - text: flickr
@@ -44,14 +44,6 @@ other-sites:
   url: http://500px.com/SimonChen1
 - text: Simon Chen Photography
   url: https://www.facebook.com/simonchenphotography
-
-footer-links:
-- url: http://github.com/simonc312
-  img: /assets/github1.png
-- url: http://twitter.com/Simonchen312
-  img: /assets/twitter1.png
-- url: http://www.linkedin.com/in/simonc312
-  img: /assets/linkedin1.png
 
 # Social networks usernames
 social:

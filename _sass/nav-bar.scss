@@ -1,4 +1,11 @@
 @import "colors";
+$navbar-max-width : 240px;
+$submenu-max-width : $navbar-max-width+ 32px;
+$site-canvas-translate : 15vw;
+
+.navbar-default {
+  background-color: $container-color !important;
+}
 
 @media only screen and (min-width : 768px) {
   /* Make Navigation Toggle on Desktop Hover */
@@ -25,9 +32,30 @@
     visibility: hidden;
   }
 
-  .logo {
+  div.media {
     display: inline;
+
+    img.logo {
+      display: inline;
+      width: 60%;
+      max-width: 180px;
+    }
+  
   }
+
+   .navbar-brand{
+      float: right !important;
+    }
+
+    .navbar-fixed-top {
+      webkit-transition: transform 0.5s;
+      transition: transform 0.5s;
+    }
+
+    .navbar-slide-up {
+      webkit-transform: translate(0%,-100%); 
+      transform: translate(0%,-100%);
+    }
 
 }
 
@@ -40,8 +68,9 @@
 
   .navbar-default{
     height: 100vh;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: $default-padding;
+    padding-right: $default-padding;
+    max-width: $navbar-max-width;
   }
 
   .sidebar-nav .navbar .navbar-collapse {
@@ -60,8 +89,8 @@
     margin-left: 0%;
   }
   .sidebar-nav .navbar li a {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: $default-padding;
+    padding-bottom: $default-padding;
     padding-left: 0px;
     padding-right: 0px;
   }
@@ -69,7 +98,7 @@
   .logo {
     float: none;
     display: block;
-    padding-bottom:6px;
+    padding-bottom: $default-padding;
   }
 
   #site-wrapper {
@@ -94,11 +123,17 @@
     position: absolute;
     top: 0;
     bottom: 0;
+    max-width: $submenu-max-width;
     //margin-bottom: -101%;
     //padding-bottom: 101%;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: $default-padding;
+    padding-right: $default-padding;
     background: $primary-color;
+    color: $primary-text-color !important;
+
+      a {
+        color: $primary-text-color !important;
+      }
     
   }
 
@@ -109,8 +144,8 @@
     backface-visibility: hidden;
   }
   .show-nav #site-canvas {
-    -webkit-transform: translateZ(0) translateX(15vw);  
-    transform: translateZ(0) translateX(15vw);  
+    -webkit-transform: translateZ(0) translateX($site-canvas-translate);  
+    transform: translateZ(0) translateX($site-canvas-translate);  
   }
 
 

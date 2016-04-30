@@ -17,7 +17,7 @@
                 {% endfor %}
             {% endif %}
 
-            <div class="col-md-6 cover-item shown padding">
+            <div class="col-md-6 cover-item description shown padding">
                 <span class="portfolio-item-description">{{ post.content }}</span>
                 {% if post.blog-url %}
                 <br></br>
@@ -42,10 +42,10 @@
     {% endfor %}
 
     {% if post_match == false %}
-      {% if page.url contains 'project' %}
-        {% include portfolio-thumbnail.html %}
-      {% else %}
+      {% if page.url contains 'blog' %}
         {% include blog.html %}
+      {% else %}
+        {% include portfolio-thumbnail.html %}
       {% endif %}    
     {% endif %}
 </div>

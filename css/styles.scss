@@ -3,6 +3,7 @@
 ---
 
 // Imports
+@import "space_theme";
 @import "nav-bar";
 @import "portfolio-items";
 @import "social-media";
@@ -17,7 +18,8 @@ html, body { height: 100%; }
 .no-underline { text-decoration: none; }
 
 .banner{
-  background-color:#ADD8E6 ;
+  background-color: $banner-color;
+  color: $primary-text-color;
   padding-top:20px;
   padding-bottom:20px;
   vertical-align:middle; 
@@ -41,7 +43,7 @@ img.float-left {
 }
 
 .background-pattern{
-  background-image: url("/assets/gplaypattern.png");
+  background-image: url($background-url);
   background-repeat:repeat; 
 }
 
