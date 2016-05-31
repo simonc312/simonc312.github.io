@@ -51,6 +51,12 @@ $(window).load(function() {
     // try to make height of submenu match document 
     $(document).ready(function(){
       $('#site-submenu').height($(document).height());
-    });
+
+      // animate hambuger icon in left_sidebar on mobile 
+      $('.hamburger').click(function(){
+        $(this).toggleClass('is-active');
+      });
+
+    }); //end window.load 
 
 });
