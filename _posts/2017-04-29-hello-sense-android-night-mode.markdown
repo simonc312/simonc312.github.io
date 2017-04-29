@@ -2,7 +2,7 @@
 layout: default
 modal-id: 8
 date: 2017-04-29
-img: sfcrime.png
+img: hello_sense_night_mode_cover.jpeg
 title: Android Night Mode for Sense
 subtitle: working at Hello 
 project-date: April 2017
