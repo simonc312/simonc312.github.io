@@ -28,8 +28,8 @@
 
 			    	<li class="{{ current }}">
 			        	<a href="{{ link.url }}">
-                  <span class="{{ link.glyph }} {{ link.color }}"></span>{{ link.text }}
-                </a>
+                  			<span class="{{ link.glyph }} {{ link.color }}"></span>{{ link.text }}
+                		</a>
 			      	</li>
 			  	{% endfor %}
 			</ul>
@@ -42,7 +42,10 @@
                     <i class="fa fa-fw fa-{{ network.title }}"></i>
                   </a>
               </li>
-              {% endfor %}
+			  {% endfor %}
+			  <li>
+				  {% include fb_messenger_button.html %}
+			  </li>
           </ul>
       </div>
 		</div>
