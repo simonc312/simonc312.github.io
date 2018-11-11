@@ -1,2 +1,4 @@
 _site/
 images/
+node_modules/
+.vscode/

@@ -1,0 +1,23 @@
+{
+  "name": "simonc312-github-io",
+  "version": "1.0.0",
+  "description": "building my personal website",
+  "main": "index.html",
+  "repository": "https://github.com/simonc312/simonc312.github.io.git",
+  "author": "simon <simon.c312@berkeley.edu>",
+  "license": "MIT",
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,css,md}": ["prettier --write", "git add"]
+  },
+  "devDependencies": {
+    "husky": "^1.1.3",
+    "lint-staged": "^8.0.4",
+    "prettier": "^1.15.2"
+  }
+}
