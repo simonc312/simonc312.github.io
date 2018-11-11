@@ -7,13 +7,19 @@
   "author": "simon <simon.c312@berkeley.edu>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "bundle exec jekyll serve"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": ["prettier --write", "git add"]
+    "*.{js,jsx,json,css,md,html}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "husky": "^1.1.3",
