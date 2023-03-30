@@ -2,11 +2,10 @@ safe:        true
 port:        4000
 baseurl:     /
 permalink:   pretty
-exclude: ['images']
-#Setup
+exclude: ['images', 'Gemfile', 'Gemfile.lock', 'README.md', 'package-lock.json', 'package.json']
 title:       Simon Chen
 img:         /assets/profile-picture.jpg
-tagline:     'Welcome to my personal website! Feel free to waste time here. Updated weekly.'
+tagline:     'Welcome to my personal website! Feel free to waste time here.'
 url:         http://localhost:4000
 future:      true
 
